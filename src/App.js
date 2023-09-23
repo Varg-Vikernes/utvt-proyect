@@ -1,14 +1,12 @@
-import Navbar from './Components/navbar/nav';
-import Home from './Components/home/home';
-import Footer from './Components/footer/foter';
-import './App.css';
+// App.jsx
+import React from 'react';
+import MyRoutes from './routes/routes';
+
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      <Home />
-
-      <Footer />
+      {/* Otros componentes o contenido de la aplicación */}
+      <MyRoutes />
     </div>
   );
 }
