@@ -21,7 +21,7 @@ function Paso2Correo() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Paso 2: Correo Electrónico</h2>
+      <h2 className="text-2xl font-bold mb-4">Paso 2: Confirmar Correo Electrónico</h2>
       {correoEnviado ? (
         correoConfirmado ? (
           <div>

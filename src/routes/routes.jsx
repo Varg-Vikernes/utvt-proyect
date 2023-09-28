@@ -4,6 +4,7 @@ import {createBrowserRouter,  RouterProvider,  Link,  Route,  Navigate,} from "r
 
 import Login from "../page/Auth/Login";
 import Register from "../page/Auth/Register";
+import RecoveryForgot from "../page/Auth/RecoveryForgot";
 import Home from "../page/Home/Overview";
 import Error404 from "../page/Error/Error404";
 import ErrorBoundary from "../page/Error/ErrorBoundary"; // Importa tu componente de manejo de errores
@@ -23,6 +24,10 @@ const routerConfig = [
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/recovery_forgot",
+    element: <RecoveryForgot />,
   },
   {
     path: "/register",
