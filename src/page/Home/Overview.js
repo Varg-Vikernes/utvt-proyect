@@ -12,8 +12,8 @@ function Dashboard() {
     <div>
       <Navbar />
       <Home />
-      <DescriptionProduct />
-      <DescriptionProductRight />
+      <DescriptionProduct /> {/* descricion producto izquiera */}
+      <DescriptionProductRight />{/* descricion producto derecha */}
       <ProductPage />
       <Cards />
 
