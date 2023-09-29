@@ -20,11 +20,11 @@ const Paso2 = () => {
 };
 
 const Paso3 = () => {
-    return (
-        <div>
-          <Paso3Mensaje />
-        </div>
-      );
+  return (
+    <div>
+      <Paso3Mensaje />
+    </div>
+  );
 };
 
 const TablaPasos = () => {
@@ -67,7 +67,7 @@ const TablaPasos = () => {
           }`}
           onClick={() => setPasoActual(3)}
         >
-          Paso 3: Mostrar Mensaje de Listo
+          Paso 3: Mostrar Mensaje de Conclucion
         </div>
       </div>
       <div className="mt-4">

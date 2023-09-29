@@ -21,11 +21,11 @@ function Paso3Mensaje({ nombre }) {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Paso 3: Mensaje</h2>
+      <h2 className="text-2xl font-bold mb-4">Paso 3: Conclusion del Registro</h2>
       <p>
         Hola {nombre}, ya puedes acceder al sitio!!
       </p>
-      <img src="/assets/bienvenida.png" alt="Mensaje de Bienvenida" className="mt-4" />
+      <img src="/assets/completado.png" alt="Mensaje de Bienvenida" className="mt-4" width={100} height={100} />
       <button
         onClick={handleRedireccionar}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4"
