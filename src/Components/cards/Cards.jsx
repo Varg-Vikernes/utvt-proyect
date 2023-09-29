@@ -62,16 +62,16 @@ const Cards = () => {
     return (
         <div className="flex flex-wrap justify-center">
             <Card
-                imgSrc="https://via.placeholder.com/300"
+                imgSrc="https://th.bing.com/th/id/OIP.JzTjeYIraWHa7BppyI6teAHaEc?pid=ImgDet&rs=1/300"
                 description="Tostadas de Aguacate y Queso Vegano Untable"
             />
             {/* Otras tarjetas aquí */}
             <Card
-                imgSrc="https://via.placeholder.com/300"
+                imgSrc="https://th.bing.com/th/id/OIP.JzTjeYIraWHa7BppyI6teAHaEc?pid=ImgDet&rs=1/300"
                 description="Tostadas de Aguacate y Queso Vegano Untable"
             />
             <Card
-                imgSrc="https://via.placeholder.com/300"
+                imgSrc="https://th.bing.com/th/id/OIP.JzTjeYIraWHa7BppyI6teAHaEc?pid=ImgDet&rs=1/300"
                 description="Tostadas de Aguacate y Queso Vegano Untable"
             />
         </div>
