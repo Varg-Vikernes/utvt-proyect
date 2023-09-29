@@ -6,6 +6,7 @@ import Login from "../page/Auth/Login";
 import Register from "../page/Auth/Register";
 import RecoveryForgot from "../page/Auth/RecoveryForgot";
 import Home from "../page/Home/Overview";
+import AboutUs from "../Components/AboutUs/AboutUs";
 import Error404 from "../page/Error/Error404";
 import ErrorBoundary from "../page/Error/ErrorBoundary"; // Importa tu componente de manejo de errores
 
@@ -22,12 +23,12 @@ const routerConfig = [
     element: <Login />,
   },
   {
-    path: "/login",
-    element: <Login />,
-  },
-  {
     path: "/recovery_forgot",
     element: <RecoveryForgot />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "/register",
@@ -36,6 +37,10 @@ const routerConfig = [
   {
     path: "/home",
     element: isUserLoggedIn() ? <Home /> : <Navigate to="/login" />,
+  },
+  {
+    path: "/about_us",
+    element: <AboutUs />
   },
   {
     path: "*",

@@ -1,6 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const Navbar = () => {
+    const navigate = useNavigate(); // Obtiene la función de navegación
+
     const navbarStyle = {
         background: 'rgb(2,0,36)',
         background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(32,186,75,1) 0%, rgba(0,241,255,1) 100%)',
@@ -19,8 +23,8 @@ const Navbar = () => {
 
                 {/* Botones de inicio de sesión y registro en el lado derecho */}
                 <div>
-                    <button className="text-white px-4 py-2 rounded-md mr-2">Iniciar Sesión</button>
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-md">Registrar</button>
+                    <button className="bg-blue-800 text-white px-4 py-2 rounded-md mr-2" onClick={() => navigate('/login')}>Iniciar Sesión</button>
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={() => navigate('/register')}>Registrar</button>
                 </div>
             </div>
         </nav>
