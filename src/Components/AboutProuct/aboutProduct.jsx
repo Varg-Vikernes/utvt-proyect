@@ -5,7 +5,7 @@ const AboutProduct = ({ title, description, additionalInfo }) => {
 
     return (
         <div className="bg-white shadow-lg rounded-lg p-4 m-4 max-w-sm">
-            <img className="w-full h-48 object-cover mb-4" src="https://via.placeholder.com/300" alt="Imagen del producto" />
+            <img className="w-full h-48 object-cover mb-4" src="https://i0.wp.com/www.lolialliati.com/wp-content/uploads/2019/09/queso-de-semillas.png?resize=800%2C456&ssl=1/300" alt="Imagen del producto" />
             <h2 className="text-2xl font-bold">{title}</h2>
             <p className="text-gray-700">{description}</p>
 
