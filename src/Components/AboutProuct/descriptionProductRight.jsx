@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'; // Importa Link para crear un enlace in
 
 const DescriptionProductRight = () => {
     return (
-        <div className="bg-white shadow-lg rounded-lg p-4 m-4 max-w-screen-xl mx-auto flex">
+        <div id="por-que" className="bg-white shadow-lg rounded-lg p-4 m-4 max-w-screen-xl mx-auto flex">
             {/* Columna izquierda con el contenido */}
             <div className="w-1/2 mr-4">
                 <div className="animate-slide-left transition-transform duration-500 hover:translate-x-2 focus:translate-x-2">
-                    <h2 className="text-2xl font-bold mb-2">Título del Producto</h2>
+                    <h2 className="text-2xl font-bold mb-2">Por que Surgio esta idea</h2>
                     <p className="text-gray-700 mb-4">
                         Información sobre el producto que puede ser más larga si es necesario.
                     </p>

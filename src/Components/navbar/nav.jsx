@@ -16,9 +16,8 @@ const Navbar = () => {
                 {/* Logo y Opciones de menú en el lado izquierdo */}
                 <div className="flex items-center space-x-6">
                     <div className="text-white font-bold text-xl">UTVT Proyecto</div>
-                    <a href="#" className="text-white">Home</a>
-                    <a href="#" className="text-white">About</a>
-                    <a href="#" className="text-white">Contact</a>
+                    <a className="text-white" onClick={() => navigate('/home')}>Inicio</a>
+                    <a href="#por-que" className="text-white"onClick={() => navigate('/home')}>Por Que?</a>
                 </div>
 
                 {/* Botones de inicio de sesión y registro en el lado derecho */}

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Navbar from "../../Components/navbar/nav";
 import Footer from "../../Components/footer/foter";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState(""); // Cambiado de username a email
   const [password, setPassword] = useState("");
 
@@ -10,6 +12,7 @@ function Login() {
     // Simula una lógica de inicio de sesión básica (debes reemplazar con tu propia lógica)
     if (email === "usuario@ejemplo.com" && password === "contraseña") {
       // Hacer algo si las credenciales son correctas
+      navigate("/home");
     } else {
       alert("Credenciales incorrectas");
     }
