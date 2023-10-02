@@ -22,12 +22,12 @@ const routerConfig = [
     element: <Login />,
   },
   {
-    path: "/login",
-    element: <Login />,
-  },
-  {
     path: "/recovery_forgot",
     element: <RecoveryForgot />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "/register",
