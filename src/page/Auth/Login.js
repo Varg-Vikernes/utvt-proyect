@@ -88,7 +88,7 @@ function Login() {
         {/* Mitad derecha con imagen de fondo */}
         <div
           className="w-full h-screen md:w-1/2 bg-cover bg-center"
-          style={{ backgroundImage: "url(./assets/Colecalciferoldos.jpg)" }}
+          style={{ backgroundImage: "url(./assets/queso-vegano-portada.jpeg)" }}
         ></div>
       </div>
       <Footer />
