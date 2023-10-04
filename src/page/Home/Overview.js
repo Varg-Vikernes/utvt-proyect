@@ -6,15 +6,16 @@ import Footer from "../../Components/footer/foter";
 import Cards from "../../Components/cards/Cards";
 import ProductPage from "../../Components/AboutProuct/productpage";
 import DescriptionProduct from "../../Components/AboutProuct/descriptionProduct";
-import DescriptionProductRight from "../../Components/AboutProuct/descriptionProductRight";
+import VideoProduct from "../../Components/AboutProuct/videoProduct";
+import SocialNetwork from "../../Components/navbar/socialNetwork";
 function Dashboard() {
   return (
     <div>
       <Navbar />
+      <SocialNetwork />
       <Home />
-      <DescriptionProduct /> {/* descricion producto izquiera */}
-      <DescriptionProductRight />{/* descricion producto derecha */}
-      <ProductPage />
+      <DescriptionProduct />
+      <VideoProduct />
       <Cards />
       <Footer />
     </div>

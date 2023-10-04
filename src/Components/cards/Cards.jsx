@@ -35,7 +35,7 @@ const Card = ({ imgSrc, description, additionalInfo }) => {
     };
 
     return (
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden m-4 max-w-sm">
+        <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-sm mx-4 my-4"> {/* Agregamos mx-4 y my-4 para margen */}
             <img className="w-full h-48 object-cover" src={imgSrc} alt="Imagen de la tarjeta" />
             <div className="p-4">
                 <p className="text-gray-700 text-base">{description}</p>
@@ -60,7 +60,7 @@ const Card = ({ imgSrc, description, additionalInfo }) => {
 
 const Cards = () => {
     return (
-        <div className="flex flex-wrap justify-center">
+        <div className="flex justify-between flex-wrap mx-4 mb-8"> {/* Agregamos justify-between, flex-wrap y mx-4 */}
             <Card
                 imgSrc="https://th.bing.com/th/id/OIP.JzTjeYIraWHa7BppyI6teAHaEc?pid=ImgDet&rs=1/300"
                 description="Tostadas de Aguacate y Queso Vegano Untable"

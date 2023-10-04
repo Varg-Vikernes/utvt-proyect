@@ -1,30 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
+import AboutProduct from './aboutProduct';
 
-const AboutProduct = ({ title, description, additionalInfo }) => {
-    const [showMoreInfo, setShowMoreInfo] = useState(false);
-
+const ProductPage = () => {
     return (
-        <div className="bg-white shadow-lg rounded-lg p-4 m-4 max-w-sm">
-            <img className="w-full h-48 object-cover mb-4" src="https://i0.wp.com/www.lolialliati.com/wp-content/uploads/2019/09/queso-de-semillas.png?resize=800%2C456&ssl=1/300" alt="Imagen del producto" />
-            <h2 className="text-2xl font-bold">{title}</h2>
-            <p className="text-gray-700">{description}</p>
-
-            {/* Botón "Ver Más" que muestra/oculta la información adicional */}
-            <button
-                className="bg-blue-500 text-white mt-4 px-4 py-2 rounded-md hover:bg-blue-600"
-                onClick={() => setShowMoreInfo(!showMoreInfo)}
-            >
-                {showMoreInfo ? 'Ocultar Info' : 'Ver Más'}
-            </button>
-
-            {/* Información adicional que se muestra cuando se hace clic en "Ver Más" */}
-            {showMoreInfo && (
-                <div className="mt-4 text-gray-700">
-                    {additionalInfo}
-                </div>
-            )}
+        <div className="flex flex-wrap justify-between">
+            <div className="w-full md:w-1/2 lg:w-1/3 p-4">
+                <AboutProduct
+                    title="Primera etapa"
+                    description="Descripción breve del Producto 1."
+                    additionalInfo="Información adicional sobre el Producto 1."
+                />
+            </div>
+            <div className="w-full md:w-1/2 lg:w-1/3 p-4">
+                <AboutProduct
+                    title="Segunda etapa"
+                    description="Descripción breve del Producto 2."
+                    additionalInfo="Información adicional sobre el Producto 2."
+                />
+            </div>
+            <div className="w-full md:w-1/2 lg:w-1/3 p-4">
+                <AboutProduct
+                    title="Tercera etapa"
+                    description="Descripción breve del Producto 3."
+                    additionalInfo="Información adicional sobre el Producto 3."
+                />
+            </div>
         </div>
     );
 };
 
-export default AboutProduct;
+export default ProductPage;
