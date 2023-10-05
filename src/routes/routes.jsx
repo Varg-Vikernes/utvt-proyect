@@ -19,7 +19,7 @@ const isUserLoggedIn = () => {
 const routerConfig = [
   {
     path: "",
-    element: <Login />,
+    element: <Home />,
   },
   {
     path: "/recovery_forgot",

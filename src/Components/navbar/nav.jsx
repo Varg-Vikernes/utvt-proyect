@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
     const location = useLocation();
 
     const navbarStyle = {
