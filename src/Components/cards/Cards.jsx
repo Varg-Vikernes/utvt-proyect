@@ -1,28 +1,11 @@
 import React, { useState } from 'react';
 
-const Card = ({ imgSrc, description, additionalInfo }) => {
+const Card = ({ imgSrc, description, ingredientsList, instructionsList }) => {
     const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
 
     const toggleAdditionalInfo = () => {
         setShowAdditionalInfo(!showAdditionalInfo);
     };
-
-    const ingredientsList = [
-        "Pan integral o de tu elección",
-        "Aguacate maduro",
-        "Queso vegano untable",
-        "Tomate cherry, cortado en rodajas",
-        "Sal y pimienta al gusto",
-        "Cilantro fresco (opcional)"
-    ];
-
-    const instructionsList = [
-        "Tuesta las rebanadas de pan.",
-        "Unta una generosa capa de queso vegano untable en cada rebanada de pan.",
-        "Cubre con rodajas de aguacate y tomate cherry.",
-        "Espolvorea un poco de sal y pimienta al gusto.",
-        "Opcionalmente, decora con cilantro fresco picado."
-    ];
 
     const renderList = (list) => {
         return (
@@ -35,7 +18,7 @@ const Card = ({ imgSrc, description, additionalInfo }) => {
     };
 
     return (
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-sm mx-4 my-4"> {/* Agregamos mx-4 y my-4 para margen */}
+        <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-sm mx-auto my-4">
             <img className="w-full h-48 object-cover" src={imgSrc} alt="Imagen de la tarjeta" />
             <div className="p-4">
                 <p className="text-gray-700 text-base">{description}</p>
@@ -58,22 +41,86 @@ const Card = ({ imgSrc, description, additionalInfo }) => {
     );
 };
 
+
+
 const Cards = () => {
+    const recipes = [
+        {
+            imgSrc: 'URL_IMAGEN_1',
+            description: 'Receta 1',
+            ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
+            instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
+        },
+        {
+            imgSrc: 'URL_IMAGEN_2',
+            description: 'Receta 2',
+            ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
+            instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
+        },
+        {
+            imgSrc: 'URL_IMAGEN_3',
+            description: 'Receta 3',
+            ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
+            instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
+        },
+        {
+            imgSrc: 'URL_IMAGEN_4',
+            description: 'Receta 4',
+            ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
+            instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
+        },
+        {
+            imgSrc: 'URL_IMAGEN_5',
+            description: 'Receta 5',
+            ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
+            instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
+        },
+        {
+            imgSrc: 'URL_IMAGEN_6',
+            description: 'Receta 6',
+            ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
+            instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
+        },
+        {
+            imgSrc: 'URL_IMAGEN_7',
+            description: 'Receta 7',
+            ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
+            instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
+        },
+        {
+            imgSrc: 'URL_IMAGEN_8',
+            description: 'Receta 8',
+            ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
+            instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
+        },
+    ];
+    const topRecipes = recipes.slice(0, 4);
+    const bottomRecipes = recipes.slice(4, 8);
+
     return (
-        <div className="flex justify-between flex-wrap mx-4 mb-8"> {/* Agregamos justify-between, flex-wrap y mx-4 */}
-            <Card
-                imgSrc="https://th.bing.com/th/id/OIP.JzTjeYIraWHa7BppyI6teAHaEc?pid=ImgDet&rs=1/300"
-                description="Tostadas de Aguacate y Queso Vegano Untable"
-            />
-            {/* Otras tarjetas aquí */}
-            <Card
-                imgSrc="https://th.bing.com/th/id/OIP.JzTjeYIraWHa7BppyI6teAHaEc?pid=ImgDet&rs=1/300"
-                description="Tostadas de Aguacate y Queso Vegano Untable"
-            />
-            <Card
-                imgSrc="https://th.bing.com/th/id/OIP.JzTjeYIraWHa7BppyI6teAHaEc?pid=ImgDet&rs=1/300"
-                description="Tostadas de Aguacate y Queso Vegano Untable"
-            />
+        <div className="flex flex-wrap justify-center mx-auto mb-8 max-w-screen-xl">
+            <div className="flex flex-wrap w-full">
+                {topRecipes.map((recipe, index) => (
+                    <Card
+                        key={index}
+                        imgSrc={recipe.imgSrc}
+                        description={recipe.description}
+                        ingredientsList={recipe.ingredientsList}
+                        instructionsList={recipe.instructionsList}
+                    />
+                ))}
+            </div>
+            <div className="flex flex-wrap w-full">
+                {bottomRecipes.map((recipe, index) => (
+                    <Card
+                        key={index}
+                        imgSrc={recipe.imgSrc}
+                        description={recipe.description}
+                        ingredientsList={recipe.ingredientsList}
+                        instructionsList={recipe.instructionsList}
+                    />
+                ))}
+            </div>
         </div>
     );
 };
