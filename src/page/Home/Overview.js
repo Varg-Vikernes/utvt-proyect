@@ -7,16 +7,18 @@ import Cards from "../../Components/cards/Cards";
 import ProductPage from "../../Components/AboutProuct/productpage";
 import DescriptionProduct from "../../Components/AboutProuct/descriptionProduct";
 import VideoProduct from "../../Components/AboutProuct/videoProduct";
-import SocialNetwork from "../../Components/navbar/socialNetwork";
+import Blog from "../../Components/blog/blog";
+
 function Dashboard() {
   return (
     <div>
       <Navbar />
-      <SocialNetwork />
       <Home />
       <DescriptionProduct />
       <VideoProduct />
       <Cards />
+      {/*AQUI VA LA UBICACION */}
+      <Blog />
       <Footer />
     </div>
   );
