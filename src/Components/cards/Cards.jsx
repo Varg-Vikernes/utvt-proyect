@@ -46,49 +46,49 @@ const Card = ({ imgSrc, description, ingredientsList, instructionsList }) => {
 const Cards = () => {
     const recipes = [
         {
-            imgSrc: 'URL_IMAGEN_1',
+            imgSrc: 'https://th.bing.com/th/id/R.129840287191200e7ec08279ff938d66?rik=A89%2b6zxNaX7zMQ&pid=ImgRaw&r=0',
             description: 'Receta 1',
             ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
             instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
         },
         {
-            imgSrc: 'URL_IMAGEN_2',
+            imgSrc: 'https://th.bing.com/th/id/R.129840287191200e7ec08279ff938d66?rik=A89%2b6zxNaX7zMQ&pid=ImgRaw&r=0',
             description: 'Receta 2',
             ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
             instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
         },
         {
-            imgSrc: 'URL_IMAGEN_3',
+            imgSrc: 'https://th.bing.com/th/id/R.129840287191200e7ec08279ff938d66?rik=A89%2b6zxNaX7zMQ&pid=ImgRaw&r=0',
             description: 'Receta 3',
             ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
             instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
         },
         {
-            imgSrc: 'URL_IMAGEN_4',
+            imgSrc: 'https://th.bing.com/th/id/R.129840287191200e7ec08279ff938d66?rik=A89%2b6zxNaX7zMQ&pid=ImgRaw&r=0',
             description: 'Receta 4',
             ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
             instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
         },
         {
-            imgSrc: 'URL_IMAGEN_5',
+            imgSrc: 'https://th.bing.com/th/id/R.129840287191200e7ec08279ff938d66?rik=A89%2b6zxNaX7zMQ&pid=ImgRaw&r=0',
             description: 'Receta 5',
             ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
             instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
         },
         {
-            imgSrc: 'URL_IMAGEN_6',
+            imgSrc: 'https://th.bing.com/th/id/R.129840287191200e7ec08279ff938d66?rik=A89%2b6zxNaX7zMQ&pid=ImgRaw&r=0',
             description: 'Receta 6',
             ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
             instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
         },
         {
-            imgSrc: 'URL_IMAGEN_7',
+            imgSrc: 'https://th.bing.com/th/id/R.129840287191200e7ec08279ff938d66?rik=A89%2b6zxNaX7zMQ&pid=ImgRaw&r=0',
             description: 'Receta 7',
             ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
             instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
         },
         {
-            imgSrc: 'URL_IMAGEN_8',
+            imgSrc: 'https://th.bing.com/th/id/R.129840287191200e7ec08279ff938d66?rik=A89%2b6zxNaX7zMQ&pid=ImgRaw&r=0',
             description: 'Receta 8',
             ingredientsList: ['Ingrediente 1', 'Ingrediente 2', 'Ingrediente 3'],
             instructionsList: ['Paso 1', 'Paso 2', 'Paso 3'],
@@ -99,6 +99,9 @@ const Cards = () => {
 
     return (
         <div className="flex flex-wrap justify-center mx-auto mb-8 max-w-screen-xl">
+            <br />
+            <h1 className="text-4xl font-bold text-center w-full mb-4">Título del Grupo de Recetas</h1>
+            <p className="text-lg text-gray-600 text-center w-full mb-8">Descripción breve del grupo de recetas</p>
             <div className="flex flex-wrap w-full">
                 {topRecipes.map((recipe, index) => (
                     <Card
