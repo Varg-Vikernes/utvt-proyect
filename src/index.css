@@ -17,3 +17,24 @@
 .animate-slide-left {
     animation: slide-in-left 0.5s ease-in-out;
 }
+
+/* Estilo personalizado para los campos autocompletados */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #047857 inset !important; /* Fondo verde */
+  color: #fff; /* Texto blanco */
+}
+/* styles.css */
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
