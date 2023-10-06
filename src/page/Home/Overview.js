@@ -5,7 +5,7 @@ import Home from "../../Components/home/home";
 import Footer from "../../Components/footer/foter";
 import Cards from "../../Components/cards/Cards";
 import ProductPage from "../../Components/AboutProuct/productpage";
-import DescriptionProduct from "../../Components/AboutProuct/descriptionProduct";
+import ComeAbout from "../../Components/AboutProuct/ComeAbout";
 import VideoProduct from "../../Components/AboutProuct/videoProduct";
 import SocialNetwork from "../../Components/navbar/socialNetwork";
 function Dashboard() {
@@ -14,7 +14,7 @@ function Dashboard() {
       <Navbar />
       <SocialNetwork />
       <Home />
-      <DescriptionProduct />
+      <ComeAbout />
       <VideoProduct />
       <Cards />
       <Footer />
