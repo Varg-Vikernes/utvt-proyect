@@ -3,9 +3,8 @@ import React from "react";
 const informacion = {
   titulo: "¿Cómo surgió esta idea?",
   contenido: [
-    "Nuestro queso vegano untable con vitamina D es una deliciosa alternativa a los productos lácteos tradicionales.",
-    "La idea de nuestro queso vegano untable con vitamina D surgió de una combinación de factores que reflejan la creciente demanda por opciones veganas y saludables en el mercado alimentario.",
-    "A medida que más personas optan por un estilo de vida basado en plantas y buscan alternativas más conscientes y sostenibles a los productos lácteos tradicionales, nos dimos cuenta de la necesidad de desarrollar un producto que satisficiera estas demandas.",
+    "",
+    "Nuestro queso es una deliciosa alternativa a los productos lácteos tradicionales.    La idea de nuestro queso vegano untable con vitamina D surgió de una combinación de factores que reflejan la creciente demanda por opciones veganas y saludables en el mercado alimentario.    A medida que más personas optan por un estilo de vida basado en plantas y buscan alternativas más conscientes y sostenibles a los productos lácteos tradicionales, nos dimos cuenta de la necesidad de desarrollar un producto que satisficiera estas demandas.",
   ],
 };
 
@@ -15,17 +14,16 @@ const ComeAbout = () => {
       id="como-surgio-idea"
       className="h-screen flex justify-center items-center"
     >
-      <div className="w-9/10 bg-white flex m-10">
+      <div className="w-9/10 bg-white flex m-20">
         {/* Parte izquierda (3:4) - Texto */}
-        <div className="w-3/4 p-4">
+        <div className="w-3/4 p-8">
           <h2 className="text-4xl font-bold text-center mb-4">
             {informacion.titulo}
           </h2>
-          <p className="text-2xl text-justify">
+          <p className="text-xl text-justify">
             {informacion.contenido.map((parrafo, index) => (
               <React.Fragment key={index}>
                 {parrafo}
-                <br />
                 <br />
               </React.Fragment>
             ))}
