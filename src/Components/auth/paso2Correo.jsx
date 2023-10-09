@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import TablaPasos from '../../Components/auth/TablaPasos';
+import React, { useState } from "react";
+import TablaPasos from "../../Components/auth/TablaPasos";
 
 function Paso2Correo() {
   const [correoEnviado, setCorreoEnviado] = useState(false);
@@ -21,7 +21,9 @@ function Paso2Correo() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Paso 2: Confirmar Correo Electrónico</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        Paso 2: Confirmar Correo Electrónico
+      </h2>
       {correoEnviado ? (
         correoConfirmado ? (
           <div>
@@ -35,7 +37,9 @@ function Paso2Correo() {
           </div>
         ) : (
           <div>
-            <p>Se ha enviado un mensaje de confirmación al correo electrónico.</p>
+            <p>
+              Se ha enviado un mensaje de confirmación al correo electrónico.
+            </p>
             <button
               onClick={confirmarCorreo}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4"
