@@ -1,10 +1,10 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import MyRoutes from './routes/routes';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import MyRoutes from "./routes/routes";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 
-const root = document.getElementById('root');
+const root = document.getElementById("root");
 const rootElement = createRoot(root);
 
 rootElement.render(

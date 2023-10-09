@@ -5,8 +5,7 @@ function BackgroundImage() {
     <div
       className="w-full h-screen md:w-1/2 bg-cover bg-center"
       style={{
-        backgroundImage:
-          "url(/assets/auth/image/queso-vegano-portada.jpeg)",
+        backgroundImage: "url(/assets/auth/image/queso-vegano-portada.jpeg)",
       }}
     ></div>
   );

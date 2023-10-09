@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function LoginForm({ handleLogin, email, setEmail, password, setPassword }) {
   return (
     <div className="w-full md:w-1/2 p-6 flex items-center justify-center">
-    <div className="max-w-md bg-neutral-200 rounded-lg  overflow-hidden p-4 w-70 md:w-3/4 shadow-lg shadow-indigo-950">  
+      <div className="max-w-md bg-neutral-200 rounded-lg  overflow-hidden p-4 w-70 md:w-3/4 shadow-lg shadow-indigo-950">
         <h1 className="text-2xl font-semibold mb-4 text-center">
           Inicio de Sesión
         </h1>

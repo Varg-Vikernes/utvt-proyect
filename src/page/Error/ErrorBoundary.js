@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -27,9 +27,7 @@ class ErrorBoundary extends Component {
             <Link
               to="/home"
               className="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300"
-            >
-              
-            </Link>
+            ></Link>
           </div>
         </div>
       );

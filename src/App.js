@@ -1,6 +1,6 @@
 // App.jsx
-import React from 'react';
-import MyRoutes from './routes/routes';
+import React from "react";
+import MyRoutes from "./routes/routes";
 
 function App() {
   return (
