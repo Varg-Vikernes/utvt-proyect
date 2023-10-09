@@ -1,15 +1,20 @@
-// Routes.jsx
 import React from "react";
-import {createBrowserRouter,  RouterProvider,  Link,  Route,  Navigate,} from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Link,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import Login from "../page/Auth/Login";
 import Register from "../page/Auth/Register";
 import RecoveryForgot from "../page/Auth/RecoveryForgot";
 import Home from "../page/Home/Overview";
 import Error404 from "../page/Error/Error404";
-import ErrorBoundary from "../page/Error/ErrorBoundary"; // Importa tu componente de manejo de errores
+import ErrorBoundary from "../page/Error/ErrorBoundary";
 
-// Función para comprobar si el usuario tiene una sesión iniciada (puedes implementar esto según tus necesidades)
+// Función para comprobar si el usuario tiene una sesión iniciada (parametrizado)
 const isUserLoggedIn = () => {
   // Implementa la lógica para verificar si el usuario tiene una sesión iniciada
   // Devuelve true si tiene una sesión iniciada, de lo contrario, devuelve false.
@@ -64,7 +69,6 @@ const MyRoutes = () => (
       </nav>
 
       {/* Configura la ruta para errores */}
-
       <Route path="*" element={<Error404 />} />
     </RouterProvider>
   </ErrorBoundary>

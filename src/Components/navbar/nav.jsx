@@ -5,93 +5,96 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const navbarStyle = {
-    background: "rgb(255,255,255)",
-    background:
-      "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(247,249,210,1) 0%, rgba(255,255,255,0.9332107843137255) 100%)",
-    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.2)",
-  };
-
-  const menuLinkStyle = "text-black hover:text-blue-400";
-  const buttonStyle =
-    "bg-blue-800 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600";
-
   return (
-    <nav style={navbarStyle} className="p-4 shadow-lg sticky top-0 z-50">
+    <nav
+      className="bg-custom-green text-white p-4 shadow-lg sticky top-0 z-50"
+      style={{ backgroundColor: "#5D9C59" }}
+    >
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center space-x-6">
-          <div className="text-black font-bold text-xl">
-            <img
-              src="../assets/home/navbar/logo q-spicy.jpeg"
-              alt="Logo de Q-spicy"
-              className=" h-auto object-cover max-w-14 max-h-14"
-            />
-          </div>
+        {/* Logo */}
+        <div>
+          <img
+            src="../assets/home/navbar/logo q-spicy.png"
+            alt="Logo de Q-spicy"
+            className="h-auto object-cover max-w-14 max-h-14 "
+          />
         </div>
-        <div className="flex items-center space-x-6">
-          <a
-            className={
-              location.pathname === "/home#bienvenida"
-                ? `${menuLinkStyle} border-b-2 border-blue-500`
-                : menuLinkStyle
-            }
-            onClick={() => navigate("/home#bienvenida")}
+
+        {/* Menú de navegación */}
+        <div className="flex items-start flex-auto flex-row space-x-10 p-3">
+          <NavLink
+            path="/home#Bienbenida"
+            currentPath={location.pathname}
+            onClick={navigate}
           >
             Bienvenido
-          </a>
-          <a
-            className={
-              location.pathname === "/home#como-surgio-esta-idea"
-                ? `${menuLinkStyle} border-b-2 border-blue-500`
-                : menuLinkStyle
-            }
-            onClick={() => navigate("/home#como-surgio-esta-idea")}
+          </NavLink>
+          <NavLink
+            path="/home#como-surgio-esta-idea"
+            currentPath={location.pathname}
+            onClick={navigate}
           >
-            ¿Cómo Surgio?
-          </a>
-          <a
-            className={
-              location.pathname === "/home#conocenos"
-                ? `${menuLinkStyle} border-b-2 border-blue-500`
-                : menuLinkStyle
-            }
-            onClick={() => navigate("/home#conocenos")}
+            ¿Cómo Surgió?
+          </NavLink>
+          <NavLink
+            path="/home#conocenos"
+            currentPath={location.pathname}
+            onClick={navigate}
           >
-            Conocenos
-          </a>
-          <a
-            className={
-              location.pathname === "/home#recetario"
-                ? `${menuLinkStyle} border-b-2 border-blue-500`
-                : menuLinkStyle
-            }
-            onClick={() => navigate("/home#recetario")}
+            Conócenos
+          </NavLink>
+          <NavLink
+            path="/home#recetario"
+            currentPath={location.pathname}
+            onClick={navigate}
           >
             Recetario
-          </a>
-
-          <a
-            className={
-              location.pathname === "/blog"
-                ? `${menuLinkStyle} border-b-2 border-blue-500`
-                : menuLinkStyle
-            }
-            onClick={() => navigate("/blog")}
+          </NavLink>
+          <NavLink
+            path="/blog"
+            currentPath={location.pathname}
+            onClick={navigate}
           >
             Blog
-          </a>
+          </NavLink>
         </div>
+
+        {/* Botones de inicio de sesión y registro */}
         <div className="flex items-center space-x-2">
-          <button className={buttonStyle} onClick={() => navigate("/login")}>
+          <TransparentButton onClick={() => navigate("/login")}>
             Iniciar Sesión
-          </button>
-          <button className={buttonStyle} onClick={() => navigate("/register")}>
+          </TransparentButton>
+          <TransparentButton onClick={() => navigate("/register")}>
             Registrar
-          </button>
+          </TransparentButton>
         </div>
       </div>
     </nav>
   );
 };
+
+// Componente para los elementos del menú de navegación
+const NavLink = ({ path, currentPath, onClick, children }) => {
+  const isActive = currentPath === path;
+  const linkClasses = isActive
+    ? "text-white hover:bg-white hover:text-custom-green border-b-2 border-white rounded-md font-bold text-16"
+    : "text-white hover:border-white hover:border-b-2 rounded-s border-transparent border-b-2 font-bold";
+
+  return (
+    <a className={linkClasses} onClick={() => onClick(path)}>
+      {children}
+    </a>
+  );
+};
+
+// Componente para los botones transparentes con efecto hover
+const TransparentButton = ({ onClick, children }) => (
+  <button
+    className="bg-transparent text-white hover:border-4 hover:border-white hover:rounded-md p-2 px-4 border-4 border-transparent "
+    onClick={onClick}
+  >
+    {children}
+  </button>
+);
 
 export default Navbar;
