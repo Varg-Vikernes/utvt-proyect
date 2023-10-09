@@ -50,7 +50,7 @@ const Card = ({ imgSrc, description, ingredientsList, instructionsList }) => {
   );
 };
 
-const Cards = () => {
+const RecipeCards = () => {
   const recipes = [
     {
       imgSrc: "URL_IMAGEN_1",
@@ -132,4 +132,4 @@ const Cards = () => {
   );
 };
 
-export default Cards;
+export default RecipeCards;

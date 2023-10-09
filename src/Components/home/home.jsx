@@ -4,9 +4,7 @@ const Home = ({ backgroundImage, height, width }) => {
   const containerStyle = {
     minHeight: height || "70vh",
     width: width || "100%",
-    backgroundImage: `url(${
-      backgroundImage || require("../../Components/home/fondo.png")
-    })`,
+    backgroundImage: "url(/assets/home/image/fondo.png)",
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundColor: "rgba(0, 0, 0, 0.5)", // Fondo transparente
