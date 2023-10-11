@@ -13,10 +13,9 @@ import RecoveryForgot from "../page/Auth/RecoveryForgot";
 import Home from "../page/Home/Overview";
 import Error404 from "../page/Error/Error404";
 import ErrorBoundary from "../page/Error/ErrorBoundary";
-
-// Función para comprobar si el usuario tiene una sesión iniciada (parametrizado)
-const isUserLoggedIn = () => {
-  // Implementa la lógica para verificar si el usuario tiene una sesión iniciada
+import PrivateRoute from "../page/Auth/PrivateRoute";
+const isUserLoggedIn = async () => {
+  // Utiliza tu lógica real para verificar si el usuario tiene una sesión iniciada.
   // Devuelve true si tiene una sesión iniciada, de lo contrario, devuelve false.
   return true; // Cambia esto según tu lógica real.
 };
@@ -40,11 +39,18 @@ const routerConfig = [
   },
   {
     path: "/home",
-    element: isUserLoggedIn() ? <Home /> : <Navigate to="/login" />,
+    element: (
+      <PrivateRoute
+        path="/home"
+        element={<Home />}
+        isUserAuthenticated={isUserLoggedIn}
+        redirectPath="/login"
+      />
+    ),
   },
   {
     path: "*",
-    element: <Error404 />, // Ruta de error 404
+    element: <Error404 />,
   },
 ];
 
@@ -53,7 +59,6 @@ const router = createBrowserRouter(routerConfig);
 const MyRoutes = () => (
   <ErrorBoundary>
     <RouterProvider router={router}>
-      {/* Agrega una navegación básica */}
       <nav>
         <ul>
           <li>
@@ -67,8 +72,6 @@ const MyRoutes = () => (
           </li>
         </ul>
       </nav>
-
-      {/* Configura la ruta para errores */}
       <Route path="*" element={<Error404 />} />
     </RouterProvider>
   </ErrorBoundary>
