@@ -11,7 +11,7 @@ const informacion = {
 const ComeAbout = () => {
   return (
     <div
-      id="como-surgio-idea"
+      id="como-surgio-esta-idea"
       className="h-screen flex justify-center items-center"
     >
       <div className="w-9/10 bg-white flex m-20">

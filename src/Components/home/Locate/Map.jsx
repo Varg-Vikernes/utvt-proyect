@@ -1,6 +1,6 @@
 import React from "react";
 
-function BackgroundImage() {
+function Map() {
   return (
     <div
       className="w-full h-screen md:w-1/2 bg-cover bg-center"
@@ -11,4 +11,4 @@ function BackgroundImage() {
   );
 }
 
-export default BackgroundImage;
+export default Map;
