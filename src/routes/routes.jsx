@@ -14,10 +14,14 @@ import Home from "../page/Home/Overview";
 import Error404 from "../page/Error/Error404";
 import ErrorBoundary from "../page/Error/ErrorBoundary";
 import PrivateRoute from "../page/Auth/PrivateRoute";
+import AdminDashboard from "../page/Dashboard/AdminDashboard";
+
 const isUserLoggedIn = async () => {
-  // Utiliza tu lógica real para verificar si el usuario tiene una sesión iniciada.
-  // Devuelve true si tiene una sesión iniciada, de lo contrario, devuelve false.
   return true; // Cambia esto según tu lógica real.
+};
+
+const isUserAdmin = async () => {
+  return false; // Cambia esto según tu lógica real para verificar si el usuario es administrador.
 };
 
 const routerConfig = [
@@ -49,6 +53,18 @@ const routerConfig = [
     ),
   },
   {
+    path: "/admin",
+    element: (
+      <PrivateRoute
+        path="/admin"
+        element={<AdminDashboard />}
+        isUserAuthenticated={isUserLoggedIn}
+        isUserAdmin={isUserAdmin}
+        redirectPath="/login"
+      />
+    ),
+  },
+  {
     path: "*",
     element: <Error404 />,
   },
@@ -69,6 +85,9 @@ const MyRoutes = () => (
           </li>
           <li>
             <Link to="/home">Dashboard</Link>
+          </li>
+          <li>
+            <Link to="/admin">Admin Dashboard</Link>
           </li>
         </ul>
       </nav>
