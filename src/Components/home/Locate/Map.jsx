@@ -1,14 +1,29 @@
 import React from "react";
+import GoogleMapReact from "google-map-react";
 
-function Map() {
-  return (
-    <div
-      className="w-full h-screen md:w-1/2 bg-cover bg-center"
-      style={{
-        backgroundImage: "url(/assets/auth/image/queso-vegano-portada.jpeg)",
-      }}
-    ></div>
-  );
-}
+const LocationPin = ({ text }) => (
+  <div className="pin">
+    {text}
+  </div>
+);
+
+const Map = ({ location, zoomLevel }) => (
+  <div className="map">
+    <h2 className="map-h2">Puedes visitarnos en</h2>
+    <div className="google-map">
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: '' }}//aqui va la api de google
+        defaultCenter={location}
+        defaultZoom={zoomLevel}
+      >
+        <LocationPin
+          lat={location.lat}
+          lng={location.lng}
+          text={location.address}
+        />
+      </GoogleMapReact>
+    </div>
+  </div>
+);
 
 export default Map;
