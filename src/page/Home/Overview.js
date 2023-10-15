@@ -5,7 +5,7 @@ import Home from "../../Components/home/home";
 import Footer from "../../Components/footer/foter";
 import RecipeCards from "../../Components/home/recipes/RecipeCards";
 import ProductPage from "../../Components/home/AboutProuct/productpage";
-import Map from "../../Components/home/Locate/Map";
+//import Map from "../../Components/home/Locate/Map";
 import Blog from "../../Components/home/Blog/Blog";
 import ComeAbout from "../../Components/home/AboutProuct/ComeAbout";
 import VideoProduct from "../../Components/home/AboutProuct/videoProduct";
@@ -17,7 +17,7 @@ function Dashboard() {
       <ComeAbout />
       <VideoProduct />
       <RecipeCards />
-      <Map />
+      {/*<Map />*/}
       <Blog />
       <Footer />
     </div>
