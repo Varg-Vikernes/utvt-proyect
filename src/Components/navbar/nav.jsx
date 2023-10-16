@@ -1,9 +1,14 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import { isAuthenticated } from "../../services/authentication/userUtils";
+import { logout } from "../../services/authentication/authUtils";
+
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const userIsLoggedIn = isAuthenticated();
 
   return (
     <nav
@@ -23,35 +28,35 @@ const Navbar = () => {
         {/* Menú de navegación */}
         <div className="flex items-start flex-auto flex-row space-x-10 p-3">
           <NavLink
-            path="/home#Bienbenida"
+            path="/#bienvenida"
             currentPath={location.pathname}
             onClick={navigate}
           >
             Bienvenido
           </NavLink>
           <NavLink
-            path="/home#como-surgio-esta-idea"
+            path="/#como-surgio-esta-idea"
             currentPath={location.pathname}
             onClick={navigate}
           >
             ¿Cómo Surgió?
           </NavLink>
           <NavLink
-            path="/home#conocenos"
+            path="/#conocenos"
             currentPath={location.pathname}
             onClick={navigate}
           >
             Conócenos
           </NavLink>
           <NavLink
-            path="/home#recetario"
+            path="/#recetario"
             currentPath={location.pathname}
             onClick={navigate}
           >
             Recetario
           </NavLink>
           <NavLink
-            path="/blog"
+            path="/#blog"
             currentPath={location.pathname}
             onClick={navigate}
           >
@@ -61,12 +66,25 @@ const Navbar = () => {
 
         {/* Botones de inicio de sesión y registro */}
         <div className="flex items-center space-x-2">
-          <TransparentButton onClick={() => navigate("/login")}>
-            Iniciar Sesión
-          </TransparentButton>
-          <TransparentButton onClick={() => navigate("/register")}>
-            Registrar
-          </TransparentButton>
+          {userIsLoggedIn ? (
+            // Mostrar el botón de Cerrar Sesión si el usuario está autenticado
+
+            <div className="flex items-center space-x-2">
+              <TransparentButton onClick={() => logout()}>
+                Cerrar Sesión
+              </TransparentButton>
+            </div>
+          ) : (
+            // Mostrar botones de Iniciar Sesión y Registrarse si el usuario no está autenticado
+            <div className="flex items-center space-x-2">
+              <TransparentButton onClick={() => navigate("/login")}>
+                Iniciar Sesión
+              </TransparentButton>
+              <TransparentButton onClick={() => navigate("/register")}>
+                Registrar
+              </TransparentButton>
+            </div>
+          )}
         </div>
       </div>
     </nav>

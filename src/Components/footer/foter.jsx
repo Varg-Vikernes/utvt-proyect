@@ -1,6 +1,6 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa"; // Importa los íconos de react-icons
-import logoImage from "./utvt.png";
+
 
 const Footer = () => {
   return (
@@ -9,7 +9,7 @@ const Footer = () => {
         {/* Lado Izquierdo */}
         <div className="w-full md:w-1/2 lg:w-1/3 mb-4 md:mb-0 text-center">
           <img
-            src={logoImage}
+            src="../assets/home/footer/utvt.png"
             alt="Logo de la empresa"
             className="w-48 h-32 rounded-lg mx-auto mb-2 transition-transform transform hover:scale-110"
             style={{ borderRadius: "5px" }}

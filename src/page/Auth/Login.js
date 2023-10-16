@@ -1,18 +1,19 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Navbar from "../../Components/navbar/nav";
 import Footer from "../../Components/footer/foter";
-import { useNavigate } from "react-router-dom";
 import LoginForm from "../../Components/auth/LoginForm";
 import BackgroundImage from "../../Components/auth/BackgroundImage";
 
-import { loginRequest } from "../../api/loginRequest"; // Supongamos que tienes una función de solicitud de inicio de sesión en un archivo de utilidad.
-import { isUserLoggedIn, isUserAdmin } from "./authUtils";
+import { loginRequest } from "../../services/http/loginRequest";
+//import { usuariosRequest } from "../../services/http/usuariosRequest";
+import { isAuthenticated, getLocalUserData } from "../../services/authentication/userUtils";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [loginResponse, setLoginResponse] = useState(null);
 
   const handleLogin = async () => {
     try {
@@ -23,11 +24,13 @@ const Login = () => {
       }
 
       // Realiza la solicitud de inicio de sesión al servidor
-      const response = await loginRequest(email, password);
+      loginRequest(email, password);
 
-      if (isUserLoggedIn(response)) {
+      if (isAuthenticated()) {
         // El inicio de sesión fue exitoso, redirige al usuario a la página de inicio.
-        // Puedes usar history.push o Link de react-router-dom para la redirección.
+
+        getLocalUserData();
+        navigate("/");
       } else {
         // El inicio de sesión falló; muestra un mensaje de error.
         alert("Inicio de sesión fallido. Verifique sus credenciales.");

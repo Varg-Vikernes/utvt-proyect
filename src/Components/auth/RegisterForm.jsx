@@ -8,21 +8,6 @@ function RegisterForm({ handleRegister }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleRegisterClick = () => {
-    // Simula el registro (comentar esta lógica al conectar con el servidor)
-    // Debes implementar la lógica de registro en tu servidor
-    // axios.post("/api/registro", { nombre: name, correoElectronico: email, contrasena: password })
-    //   .then((response) => {
-    //     if (response.status === 201) {
-    //       history.push("/login");
-    //     } else {
-    //       setErrorMessage("Error en el registro");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     setErrorMessage("Error en el registro");
-    //   });
-
-    // Limpia los campos después del registro exitoso
     setName("");
     setEmail("");
     setPassword("");
