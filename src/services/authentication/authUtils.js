@@ -24,7 +24,7 @@ export const processLoginResponse = async (email, password) => {
 
     if (response.success) {
       // Manejar la autenticación aquí.
-      setTokenCookie(response.token);
+      // setTokenCookie(response.token);
 
       const user = response.user;
 
@@ -40,8 +40,8 @@ export const processLoginResponse = async (email, password) => {
     console.error("Error al procesar la respuesta de inicio de sesión:", error);
 
     // Elimina el token de sesión y datos del usuario localmente en caso de error.
-    deleteTokenCookie();
-    localStorage.removeItem("userData");
+    // deleteTokenCookie();
+    logout();
 
     throw error;
   }
@@ -55,6 +55,7 @@ export const logout = () => {
   const token = false;
   // Elimina información adicional local si se eliminó la cookie de token.
   clearLocalDataOnTokenLogout(token);
+  window.location.reload();
 };
 
 /**

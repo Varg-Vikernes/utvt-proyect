@@ -19,7 +19,7 @@ const Navbar = () => {
         {/* Logo */}
         <div>
           <img
-            src="../assets/home/navbar/logo q-spicy.png"
+            src="../assets/home/navbar/logo_Q-Spicy.png"
             alt="Logo de Q-spicy"
             className="h-auto object-cover max-w-14 max-h-14 "
           />
