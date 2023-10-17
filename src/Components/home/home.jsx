@@ -30,12 +30,18 @@ const Home = ({ backgroundImage, height, width }) => {
 
       {/* Botones */}
       <div className="mt-4 space-x-4">
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+        <a
+          href="/home#Bienvenida"
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+        >
           Reproducir Video
-        </button>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+        </a>
+        <a
+          href="/home#Conocenos"
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+        >
           Conócenos
-        </button>
+        </a>
       </div>
     </div>
   );

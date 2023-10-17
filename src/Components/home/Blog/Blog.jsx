@@ -4,8 +4,11 @@ import datosDeEjemplo from "./datosDeEjemplo";
 
 function Blog() {
   return (
-    <div>
-      <h1>Mis Blogs</h1>
+    <div
+      id="blog"
+      className="h-screen flex flex-col justify-center items-center"
+    >
+      <h1 className="text-3xl font-bold text-center mb-4">Mis Blogs</h1>
       {datosDeEjemplo.map((blog, index) => (
         <TarjetaBlog
           key={index}

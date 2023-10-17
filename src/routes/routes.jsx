@@ -4,7 +4,8 @@ import {
   RouterProvider,
   Link,
   Route,
-  Navigate,
+  Routes,
+  Navigate
 } from "react-router-dom";
 
 import Login from "../page/Auth/Login";
@@ -13,46 +14,50 @@ import RecoveryForgot from "../page/Auth/RecoveryForgot";
 import Home from "../page/Home/Overview";
 import Error404 from "../page/Error/Error404";
 import ErrorBoundary from "../page/Error/ErrorBoundary";
-import PrivateRoute from "../page/Auth/PrivateRoute";
-const isUserLoggedIn = async () => {
-  // Utiliza tu lógica real para verificar si el usuario tiene una sesión iniciada.
-  // Devuelve true si tiene una sesión iniciada, de lo contrario, devuelve false.
-  return true; // Cambia esto según tu lógica real.
-};
+import AdminDashboard from "../page/Dashboard/AdminDashboard";
+
+import { isAuthenticated } from "../services/authentication/userUtils"; // Importa la función de autenticación
+import { hasRole } from "../services/authorization/roleUtils";
+// import PrivateRoute from "../services/authorization/PrivateRoute"; // Importa el componente PrivateRoute
+const userData = localStorage.getItem("userData");
+//console.log(userData)
+function PrivateRoute({ element, authCheck, fallbackPath }) {
+  return authCheck() ? element : <Navigate to={fallbackPath} />;
+}
 
 const routerConfig = [
   {
-    path: "",
+    path: '/',
     element: <Home />,
   },
   {
-    path: "/recovery_forgot",
+    path: '/recovery_forgot',
     element: <RecoveryForgot />,
   },
   {
-    path: "/login",
+    path: '/login',
     element: <Login />,
   },
   {
-    path: "/register",
+    path: '/register',
     element: <Register />,
   },
   {
-    path: "/home",
+    path: '/admin',
     element: (
       <PrivateRoute
-        path="/home"
-        element={<Home />}
-        isUserAuthenticated={isUserLoggedIn}
-        redirectPath="/login"
+        element={<AdminDashboard />}
+        authCheck={() => isAuthenticated() && hasRole(userData, 'administrador')}
+        fallbackPath="/login"
       />
     ),
   },
   {
-    path: "*",
+    path: '*',
     element: <Error404 />,
   },
 ];
+
 
 const router = createBrowserRouter(routerConfig);
 
@@ -68,11 +73,21 @@ const MyRoutes = () => (
             <Link to="/register">Register</Link>
           </li>
           <li>
-            <Link to="/home">Dashboard</Link>
+            <Link to="/">Dashboard</Link>
+          </li>
+          <li>
+            <Link to="/admin">Admin Dashboard</Link>
           </li>
         </ul>
       </nav>
-      <Route path="*" element={<Error404 />} />
+      {/* Define tus rutas usando el componente <Routes> */}
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="*" element={<Error404 />} />
+      </Routes>
     </RouterProvider>
   </ErrorBoundary>
 );

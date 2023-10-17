@@ -1,135 +1,64 @@
-import React, { useState } from "react";
+import React, { Component } from 'react';
 
-const Card = ({ imgSrc, description, ingredientsList, instructionsList }) => {
-  const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
+class RecipeCards extends Component {
+  constructor() {
+    super();
+    this.state = {
+      recetas: [],
+      showDetails: false,
+    };
+  }
 
-  const toggleAdditionalInfo = () => {
-    setShowAdditionalInfo(!showAdditionalInfo);
+  toggleDetails = () => {
+    this.setState({ showDetails: !this.state.showDetails });
   };
 
-  const renderList = (list) => {
+  componentDidMount() {
+    // Realizar una solicitud fetch a la URL
+    fetch('https://backend-proyecto-api-production.up.railway.app/recetas')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        this.setState({ recetas: data });
+      })
+      .catch((error) => {
+        console.error('Error al cargar las recetas:', error);
+      });
+  }
+
+  render() {
+    const cardStyle =
+      "bg-white rounded-lg p-4 border border-gray-300 shadow-md"; // Estilo de tarjeta con Tailwind CSS
+
+    const { recetas, showDetails } = this.state;
     return (
-      <ul className="list-disc pl-6">
-        {list.map((item, index) => (
-          <li key={index} className="text-gray-700">
-            {item}
-          </li>
-        ))}
-      </ul>
+      <div>
+        <h1 className="text-3xl font-bold text-center mb-4">Recetas</h1>
+        <p className="text-xl text-gray-600 text-center mb-4">Descubre deliciosas recetas para tu cocina</p>
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {recetas.map((receta) => (
+            <li key={receta.idReceta} className={cardStyle}>
+              <h2 className="text-xl font-semibold mb-2">{receta.titulo}</h2>
+              <p>Descripción: {receta.descripcion}</p>
+              {showDetails && (
+                <div className="mt-4">
+                  <p>Elaboración: {receta.elaboracion}</p>
+                  <p>Ingredientes: {receta.ingredientes}</p>
+                </div>
+              )}
+              <p>Actualizado en: {receta.updatedAt}</p>
+              <button
+                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                onClick={this.toggleDetails}
+              >
+                {showDetails ? 'Ocultar Detalles' : 'Mostrar Detalles'}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     );
-  };
-
-  return (
-    <div
-      className="bg-white shadow-lg rounded-lg overflow-hidden max-w-sm mx-auto my-4"
-      id="recetario"
-    >
-      <img
-        className="w-full h-48 object-cover"
-        src={imgSrc}
-        alt="Imagen de la tarjeta"
-      />
-      <div className="p-4">
-        <p className="text-gray-700 text-base">{description}</p>
-        {showAdditionalInfo && (
-          <div>
-            <h3 className="text-xl font-semibold mt-2">Ingredientes:</h3>
-            {renderList(ingredientsList)}
-            <h3 className="text-xl font-semibold mt-4">Instrucciones:</h3>
-            {renderList(instructionsList)}
-          </div>
-        )}
-        <button
-          onClick={toggleAdditionalInfo}
-          className="bg-blue-500 text-white mt-4 px-4 py-2 rounded-md hover:bg-blue-600"
-        >
-          {showAdditionalInfo ? "Ocultar" : "Ver Más"}
-        </button>
-      </div>
-    </div>
-  );
-};
-
-const RecipeCards = () => {
-  const recipes = [
-    {
-      imgSrc: "URL_IMAGEN_1",
-      description: "Receta 1",
-      ingredientsList: ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      instructionsList: ["Paso 1", "Paso 2", "Paso 3"],
-    },
-    {
-      imgSrc: "URL_IMAGEN_2",
-      description: "Receta 2",
-      ingredientsList: ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      instructionsList: ["Paso 1", "Paso 2", "Paso 3"],
-    },
-    {
-      imgSrc: "URL_IMAGEN_3",
-      description: "Receta 3",
-      ingredientsList: ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      instructionsList: ["Paso 1", "Paso 2", "Paso 3"],
-    },
-    {
-      imgSrc: "URL_IMAGEN_4",
-      description: "Receta 4",
-      ingredientsList: ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      instructionsList: ["Paso 1", "Paso 2", "Paso 3"],
-    },
-    {
-      imgSrc: "URL_IMAGEN_5",
-      description: "Receta 5",
-      ingredientsList: ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      instructionsList: ["Paso 1", "Paso 2", "Paso 3"],
-    },
-    {
-      imgSrc: "URL_IMAGEN_6",
-      description: "Receta 6",
-      ingredientsList: ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      instructionsList: ["Paso 1", "Paso 2", "Paso 3"],
-    },
-    {
-      imgSrc: "URL_IMAGEN_7",
-      description: "Receta 7",
-      ingredientsList: ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      instructionsList: ["Paso 1", "Paso 2", "Paso 3"],
-    },
-    {
-      imgSrc: "URL_IMAGEN_8",
-      description: "Receta 8",
-      ingredientsList: ["Ingrediente 1", "Ingrediente 2", "Ingrediente 3"],
-      instructionsList: ["Paso 1", "Paso 2", "Paso 3"],
-    },
-  ];
-  const topRecipes = recipes.slice(0, 4);
-  const bottomRecipes = recipes.slice(4, 8);
-
-  return (
-    <div className="flex flex-wrap justify-center mx-auto mb-8 max-w-screen-xl">
-      <div className="flex flex-wrap w-full">
-        {topRecipes.map((recipe, index) => (
-          <Card
-            key={index}
-            imgSrc={recipe.imgSrc}
-            description={recipe.description}
-            ingredientsList={recipe.ingredientsList}
-            instructionsList={recipe.instructionsList}
-          />
-        ))}
-      </div>
-      <div className="flex flex-wrap w-full">
-        {bottomRecipes.map((recipe, index) => (
-          <Card
-            key={index}
-            imgSrc={recipe.imgSrc}
-            description={recipe.description}
-            ingredientsList={recipe.ingredientsList}
-            instructionsList={recipe.instructionsList}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
+  }
+}
 
 export default RecipeCards;
