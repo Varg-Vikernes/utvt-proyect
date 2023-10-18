@@ -5,7 +5,7 @@ import {
   Link,
   Route,
   Routes,
-  Navigate
+  Navigate,
 } from "react-router-dom";
 
 import Login from "../page/Auth/Login";
@@ -19,7 +19,10 @@ import AdminDashboard from "../page/Dashboard/AdminDashboard";
 import { isAuthenticated } from "../services/authentication/userUtils"; // Importa la función de autenticación
 import { hasRole } from "../services/authorization/roleUtils";
 // import PrivateRoute from "../services/authorization/PrivateRoute"; // Importa el componente PrivateRoute
-const userData = localStorage.getItem("userData");
+
+const userDataString = localStorage.getItem("userData"); // Obtiene la cadena JSON de localStorage
+const userData = JSON.parse(userDataString); // Convierte la cadena JSON en un objeto
+//console.log(isAuthenticated(), userData.rol);
 //console.log(userData)
 function PrivateRoute({ element, authCheck, fallbackPath }) {
   return authCheck() ? element : <Navigate to={fallbackPath} />;
@@ -27,37 +30,38 @@ function PrivateRoute({ element, authCheck, fallbackPath }) {
 
 const routerConfig = [
   {
-    path: '/',
+    path: "/",
     element: <Home />,
   },
   {
-    path: '/recovery_forgot',
+    path: "/recovery_forgot",
     element: <RecoveryForgot />,
   },
   {
-    path: '/login',
+    path: "/login",
     element: <Login />,
   },
   {
-    path: '/register',
+    path: "/register",
     element: <Register />,
   },
   {
-    path: '/admin',
+    path: "/admin",
     element: (
       <PrivateRoute
         element={<AdminDashboard />}
-        authCheck={() => isAuthenticated() && hasRole(userData, 'administrador')}
+        authCheck={() =>
+          isAuthenticated() && hasRole(userData, "administrador")
+        }
         fallbackPath="/login"
       />
     ),
   },
   {
-    path: '*',
+    path: "*",
     element: <Error404 />,
   },
 ];
-
 
 const router = createBrowserRouter(routerConfig);
 
