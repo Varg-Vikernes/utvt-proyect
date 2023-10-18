@@ -1,4 +1,4 @@
-export const registerRequest = async (
+export const registerUser = async (
   name,
   name_a,
   name_b,

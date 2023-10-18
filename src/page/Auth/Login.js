@@ -7,41 +7,47 @@ import LoginForm from "../../Components/auth/LoginForm";
 import BackgroundImage from "../../Components/auth/BackgroundImage";
 
 import { loginRequest } from "../../services/http/loginRequest";
-//import { usuariosRequest } from "../../services/http/usuariosRequest";
-import { isAuthenticated, getLocalUserData } from "../../services/authentication/userUtils";
+import {
+  isAuthenticated,
+  getLocalUserData,
+  clearLocalUserData,
+} from "../../services/authentication/userUtils";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null); // Agrega un estado para manejar errores
 
-  const handleLogin = async () => {
+  async function handleLogin() {
     try {
+      setError(null); // Limpia los errores al intentar iniciar sesión nuevamente
+
       if (!email || !password) {
-        // Validación: Correo electrónico y contraseña son requeridos.
-        alert("Por favor, ingrese un correo electrónico y una contraseña.");
+        setError("Por favor, ingrese un correo electrónico y una contraseña."); // Establece un mensaje de error
         return;
       }
 
       // Realiza la solicitud de inicio de sesión al servidor
-      loginRequest(email, password);
+      const loginResult = await loginRequest(email, password);
 
-      if (isAuthenticated()) {
+      if (loginResult) {
         // El inicio de sesión fue exitoso, redirige al usuario a la página de inicio.
-
         getLocalUserData();
         navigate("/");
       } else {
         // El inicio de sesión falló; muestra un mensaje de error.
-        alert("Inicio de sesión fallido. Verifique sus credenciales.");
+        setError("Inicio de sesión fallido. Verifique sus credenciales.");
+        clearLocalUserData();
       }
     } catch (error) {
       // Error de red u otro error inesperado.
-      alert(
+      setError(
         "Ocurrió un error durante el inicio de sesión. Por favor, intente nuevamente."
       );
+      clearLocalUserData();
     }
-  };
+  }
 
   return (
     <div>
