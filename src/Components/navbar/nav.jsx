@@ -1,6 +1,6 @@
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-
+import { useNavigate, useLocation, HashRouter, Link } from "react-router-dom";
+import { formStyles } from "../../styles/Constants";
 import { isAuthenticated } from "../../services/authentication/userUtils";
 import { logout } from "../../services/authentication/authUtils";
 
@@ -9,55 +9,53 @@ const Navbar = () => {
   const location = useLocation();
 
   const userIsLoggedIn = isAuthenticated();
-
+  const isLoginPage = location.pathname === "/login";
+  const isRegisterPage = location.pathname === "/register";
   return (
-    <nav
-      className="bg-custom-green text-white p-4 shadow-lg sticky top-0 z-50"
-      style={{ backgroundColor: "#5D9C59" }}
-    >
-      <div className="container mx-auto flex justify-between items-center">
+    <nav className={formStyles.navbar.nav}>
+      <div className={formStyles.navbar.container}>
         {/* Logo */}
         <div>
           <img
             src="../assets/home/navbar/logo_Q-Spicy.png"
             alt="Logo de Q-spicy"
-            className="h-auto object-cover max-w-14 max-h-14 "
+            className={formStyles.navbar.logo}
           />
         </div>
 
         {/* Menú de navegación */}
-        <div className="flex items-start flex-auto flex-row space-x-10 p-3">
+        <div className={formStyles.navbar.menu}>
           <NavLink
             path="/#bienvenida"
-            currentPath={location.pathname}
+            currentPath={location.pathname + location.hash}
             onClick={navigate}
           >
             Bienvenido
           </NavLink>
           <NavLink
             path="/#como-surgio-esta-idea"
-            currentPath={location.pathname}
+            currentPath={location.pathname + location.hash}
             onClick={navigate}
           >
             ¿Cómo Surgió?
           </NavLink>
           <NavLink
             path="/#conocenos"
-            currentPath={location.pathname}
+            currentPath={location.pathname + location.hash}
             onClick={navigate}
           >
             Conócenos
           </NavLink>
           <NavLink
             path="/#recetario"
-            currentPath={location.pathname}
+            currentPath={location.pathname + location.hash}
             onClick={navigate}
           >
             Recetario
           </NavLink>
           <NavLink
             path="/#blog"
-            currentPath={location.pathname}
+            currentPath={location.pathname + location.hash}
             onClick={navigate}
           >
             Blog
@@ -68,7 +66,6 @@ const Navbar = () => {
         <div className="flex items-center space-x-2">
           {userIsLoggedIn ? (
             // Mostrar el botón de Cerrar Sesión si el usuario está autenticado
-
             <div className="flex items-center space-x-2">
               <TransparentButton onClick={() => logout()}>
                 Cerrar Sesión
@@ -77,12 +74,16 @@ const Navbar = () => {
           ) : (
             // Mostrar botones de Iniciar Sesión y Registrarse si el usuario no está autenticado
             <div className="flex items-center space-x-2">
-              <TransparentButton onClick={() => navigate("/login")}>
-                Iniciar Sesión
-              </TransparentButton>
-              <TransparentButton onClick={() => navigate("/register")}>
-                Registrar
-              </TransparentButton>
+              {!isLoginPage && (
+                <TransparentButton onClick={() => navigate("/login")}>
+                  Iniciar Sesión
+                </TransparentButton>
+              )}
+              {!isRegisterPage && (
+                <TransparentButton onClick={() => navigate("/register")}>
+                  Registrar
+                </TransparentButton>
+              )}
             </div>
           )}
         </div>
@@ -91,6 +92,9 @@ const Navbar = () => {
   );
 };
 
+// console.log(location.pathname)
+// console.log(location.hash)
+// console.log(location.pathname+location.hash)
 // Componente para los elementos del menú de navegación
 const NavLink = ({ path, currentPath, onClick, children }) => {
   const isActive = currentPath === path;

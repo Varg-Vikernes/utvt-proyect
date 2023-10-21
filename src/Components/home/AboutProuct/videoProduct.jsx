@@ -12,7 +12,7 @@ const VideoProduct = () => {
       <div className="h-3/4 w-11/12 bg-white flex items-center justify-center">
         <iframe
           className="w-full h-full object-cover rounded-xl"
-          src="https://www.youtube.com/embed/u63KbDV3GCQ?si=s6KvyrESc5nWWKPo&controls=0"
+          src="https://www.youtube.com/embed/u63KbDV3GCQ"
           title="Video del Producto"
           allowFullScreen
         ></iframe>
