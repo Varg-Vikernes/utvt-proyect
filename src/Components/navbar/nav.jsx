@@ -112,7 +112,7 @@ const NavLink = ({ path, currentPath, onClick, children }) => {
 // Componente para los botones transparentes con efecto hover
 const TransparentButton = ({ onClick, children }) => (
   <button
-    className="bg-transparent text-white hover:border-4 hover:border-white hover:rounded-md p-2 px-4 border-4 border-transparent "
+    className="bg-transparent text-white active:text-slate-800 hover:border-4 hover:border-white hover:rounded-md p-2 px-4 border-4 border-transparent "
     onClick={onClick}
   >
     {children}
