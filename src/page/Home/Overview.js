@@ -17,8 +17,8 @@ function Dashboard() {
       <ComeAbout />
       <VideoProduct />
       <RecipeCards />
-      <Blog />
       <Map />
+      <Blog />
       <Footer />
     </div>
   );
