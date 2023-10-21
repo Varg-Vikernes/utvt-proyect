@@ -1,82 +1,116 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { formStyles } from "../../styles/Constants";
+import * as Yup from "yup"; // Importa la biblioteca Yup para validación
 
-function RegisterForm({ handleRegister }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+function RegisterForm({ handleRegister, formData, setFormData, error }) {
+  const { name, email, password, } = formData;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   const handleRegisterClick = () => {
-    setName("");
-    setEmail("");
-    setPassword("");
+    // Valida el formulario utilizando Yup
+    const schema = Yup.object().shape({
+      name: Yup.string().required("El nombre es obligatorio"),
+      email: Yup.string()
+        .email("Correo electrónico no válido")
+        .required("El correo electrónico es obligatorio"),
+      password: Yup.string()
+        .min(6, "La contraseña debe tener al menos 6 caracteres")
+        .required("La contraseña es obligatoria"),
+    });
+
+    schema
+      .validate(formData, { abortEarly: false })
+      .then(() => {
+        // Llamar a la función de registro
+        handleRegister();
+      })
+      .catch((validationError) => {
+        const errorMessages = validationError.inner.map((e) => e.message);
+        setFormData({
+          ...formData,
+          error: errorMessages,
+        });
+      });
   };
 
   return (
-    <div className="w-full md:w-1/2 p-6 flex items-center justify-center">
-      <div className="max-w-md bg-neutral-200 rounded-lg  overflow-hidden p-4 w-70 md:w-3/4 shadow-lg shadow-indigo-950">
-        <h1 className="text-2xl font-semibold mb-4 text-center">Registro</h1>
+    <div className={formStyles.container}>
+      <div className={formStyles.formContainer}>
+        <h1 className={formStyles.title}>Registro</h1>
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="name"
-          >
+          <label className={formStyles.inputLabel} htmlFor="name">
             Nombre
           </label>
           <input
-            className="border border-gray-500 rounded px-4 py-2 w-full"
+            className={formStyles.inputField}
             type="text"
             id="name"
+            name="name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={handleInputChange}
           />
         </div>
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="email"
-          >
+          <label className={formStyles.inputLabel} htmlFor="email">
             Correo Electrónico
           </label>
           <input
-            className="border border-gray-500 rounded px-4 py-2 w-full"
+            className={formStyles.inputField}
             type="text"
             id="email"
+            name="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleInputChange}
           />
         </div>
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
+          <label className={formStyles.inputLabel} htmlFor="password">
             Contraseña
           </label>
           <input
-            className="border border-gray-500 rounded px-4 py-2 w-full"
+            className={formStyles.inputField}
             type="password"
             id="password"
+            name="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleInputChange}
           />
         </div>
-        {errorMessage && (
-          <div className="text-red-500 text-sm mb-4">{errorMessage}</div>
-        )}
+
         <div className="mt-6">
           <button
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full"
+            className={formStyles.button}
             type="button"
             onClick={handleRegisterClick}
           >
             Registrarse
           </button>
         </div>
+        {error && (
+          <div className={formStyles.errorMessage}>
+            {Array.isArray(error) ? (
+              <ul>
+                {error.map((message, index) => (
+                  <li key={index}>{message}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>{error}</p>
+            )}
+          </div>
+        )}
+
         <div className="mt-4 text-center">
           ¿Ya tienes una cuenta?{" "}
-          <Link to="/login" className="text-blue-500 hover:underline">
+          <Link to="/login" className={formStyles.link}>
             Inicia sesión
           </Link>
         </div>

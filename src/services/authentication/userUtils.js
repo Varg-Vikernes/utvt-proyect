@@ -6,10 +6,10 @@
  */
 
 import { usuariosRequest } from "../http/usuariosRequest";
-const token = localStorage.getItem("tokenSession");
-const id = localStorage.getItem("id");
 
 export function getLocalUserData() {
+  const token = localStorage.getItem("tokenSession");
+  const id = localStorage.getItem("id");
   usuariosRequest(id, token);
 }
 
@@ -18,6 +18,8 @@ export function getLocalUserData() {
  */
 export function clearLocalUserData() {
   localStorage.removeItem("userData");
+  localStorage.removeItem("tokenSession");
+  localStorage.removeItem("id");
 }
 
 /**
@@ -25,5 +27,6 @@ export function clearLocalUserData() {
  * @returns {boolean} - true si el usuario está autenticado, false de lo contrario.
  */
 export function isAuthenticated() {
+  const token = localStorage.getItem("tokenSession");
   return !!token;
 }

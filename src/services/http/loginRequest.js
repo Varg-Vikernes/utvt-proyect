@@ -28,9 +28,11 @@ export const loginRequest = async (email, password, customHeaders = {}) => {
       // Almacena el token de acceso de manera local
       localStorage.setItem("tokenSession", responseData.token);
       localStorage.setItem("id", responseData.user.idUsuario);
+      return true;
+
     }
 
-    return responseData;
+    return false;
   } catch (error) {
     throw error;
   }
