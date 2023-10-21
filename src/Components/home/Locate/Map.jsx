@@ -1,29 +1,16 @@
-import React from "react";
-import GoogleMapReact from "google-map-react";
+import React from 'react';
 
-const LocationPin = ({ text }) => (
-  <div className="pin">
-    {text}
-  </div>
-);
+class Map extends React.Component {
+  render() {
+    const imageUrl = "https://s3.amazonaws.com/ciudad.mapasdemexico.com.mx/mapa-capulhuac-mexico.jpg"; // URL de la imagen
 
-const Map = ({ location, zoomLevel }) => (
-  <div className="map">
-    <h2 className="map-h2">Puedes visitarnos en</h2>
-    <div className="google-map">
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: '' }}//aqui va la api de google
-        defaultCenter={location}
-        defaultZoom={zoomLevel}
-      >
-        <LocationPin
-          lat={location.lat}
-          lng={location.lng}
-          text={location.address}
-        />
-      </GoogleMapReact>
-    </div>
-  </div>
-);
+    return (
+      <div className="flex flex-col items-center justify-center h-screen p-1 mt-0">
+        <h2 className="text-4xl mb-2">Unidad Académica de Capulhuac / Universidad</h2>
+        <img src={imageUrl} alt="Imagen" className="w-3/4" />
+      </div>
+    );
+  }
+}
 
 export default Map;
