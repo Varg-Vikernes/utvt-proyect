@@ -3,8 +3,8 @@ const datosDeEjemplo = [
     titulo: "Mi Viaje a la Playa",
     imagenSrc: "../assets/home/blog/blog.png",
     descripcion:
-      "Un relato de mi viaje a la hermosa playa. Disfruté del sol, la arena y las olas del mar.",
-    mostrarBotonLeerMas: true,
+      "Atrevete a probar nuestro queso en diferentes platillos de tu gusto gracias a su formula detallada",
+    mostrarBotonLeerMas: false,
     claseContenedor: "mb-4", // Clase CSS personalizada para el contenedor
     claseImagen: "rounded", // Clase CSS personalizada para la imagen
     fechaPublicacion: "2023-10-09",
@@ -13,25 +13,23 @@ const datosDeEjemplo = [
       alert("¡Hiciste clic en Leer Más!");
     },
   },
+
   {
-    titulo: "Recetas de Cocina",
-    imagenSrc: "url_de_la_imagen_2.jpg",
+    titulo: "Elaboracion de nuestro queso ",
+    imagenSrc: "https://4.bp.blogspot.com/-rGINeSCBXl8/WzAZfgJCf7I/AAAAAAAAJxc/DMrSRbiFDRgVTwC0SIny_ERBtpwz2gQFgCEwYBhgL/w1200-h630-p-k-no-nu/elaboracion-queso-roncal-paso-a-paso-1.png",
     descripcion:
-      "Descubre deliciosas recetas de cocina para preparar en casa. Desde platos principales hasta postres.",
-    mostrarBotonLeerMas: true,
+      "Procesos quimicos y demas para la creacion del queso ademas de moldeo y proceso de empaquetado ",
+    mostrarBotonLeerMas: false, // Sin botón "Leer Más"
     claseContenedor: "mb-4", // Clase CSS personalizada para el contenedor
     claseImagen: "rounded", // Clase CSS personalizada para la imagen
-    fechaPublicacion: "2023-10-08",
-    autor: "María Rodríguez",
-    onBotonLeerMasClick: () => {
-      alert("¡Hiciste clic en Leer Más!");
-    },
+    fechaPublicacion: "2023-10-07",
+    autor: "Ana López",
   },
   {
-    titulo: "Consejos para el Éxito",
-    imagenSrc: "url_de_la_imagen_3.jpg",
+    titulo: "Consejos para una buena comida ",
+    imagenSrc: "https://enterateahora.com.mx/wp-content/uploads/2016/10/bigstock-140524295.jpg",
     descripcion:
-      "Aprende valiosos consejos para alcanzar el éxito en tu vida personal y profesional.",
+      "Aprende ricas recetas para alcanzar el platillo que que tanto deseas y aun precio bajo para su consumo .",
     mostrarBotonLeerMas: false, // Sin botón "Leer Más"
     claseContenedor: "mb-4", // Clase CSS personalizada para el contenedor
     claseImagen: "rounded", // Clase CSS personalizada para la imagen
