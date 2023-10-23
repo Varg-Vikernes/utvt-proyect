@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import SideBarComponent from './SideBarComponent';
 import Usuarios from './Usuarios';
 import Recetas from './Recetas';
+import Blog from './Blog';
+
 
 
 function AdminHome() {
@@ -10,7 +12,7 @@ function AdminHome() {
     const handleOptionSelect = (option) => {
         setSelectedOption(option);
     };
-
+    
 
     return (
         <div className="admin-container">
@@ -19,6 +21,7 @@ function AdminHome() {
             <div className="admin-content">
                 {selectedOption === 'recetas' && <Recetas />}
                 {selectedOption === 'usuarios' && <Usuarios />}
+                {selectedOption === 'blog' && <Blog  />}
                 
             </div>
         </div>
