@@ -9,9 +9,10 @@ const Footer = () => {
         {/* Lado Izquierdo */}
         <div className="w-full md:w-1/2 lg:w-1/3 mb-4 md:mb-0 text-center">
           <img
-            src="../assets/home/footer/utvt.png"
+            src="../assets/home/image/logo_sinFondo.png"
             alt="Logo de la empresa"
-            className="w-48 h-32 rounded-lg mx-auto mb-2 transition-transform transform hover:scale-110"
+            className=" sm:w-24 sm:h-24 w-24 h-24
+             rounded-lg mx-auto mb-2 transition-transform transform hover:scale-110"
             style={{ borderRadius: "5px" }}
           />
           <p className="text-sm">
