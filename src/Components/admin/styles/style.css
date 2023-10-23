@@ -1,0 +1,14 @@
+/* Estilos para el contenedor principal (AdminHome) */
+.admin-container {
+    display: flex;
+}  
+  /* Estilos para la barra lateral (SideBarComponent) */
+.sidebar {
+    width: 250px; /* Ajusta el ancho de la barra lateral según tus necesidades */
+}
+  /* Estilos para el contenido principal */
+.admin-content {
+    margin-left: 160px;
+    flex: 1;
+    padding: 100px;
+}  
