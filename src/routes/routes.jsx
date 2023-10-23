@@ -18,6 +18,7 @@ import AdminDashboard from "../page/Dashboard/AdminDashboard";
 
 import { isAuthenticated } from "../services/authentication/userUtils"; // Importa la función de autenticación
 import { hasRole } from "../services/authorization/roleUtils";
+import AdminHome from "../Components/admin/AdminHome";
 // import PrivateRoute from "../services/authorization/PrivateRoute"; // Importa el componente PrivateRoute
 
 const userDataString = localStorage.getItem("userData"); // Obtiene la cadena JSON de localStorage
@@ -49,7 +50,7 @@ const routerConfig = [
     path: "/admin",
     element: (
       <PrivateRoute
-        element={<AdminDashboard />}
+        element={<AdminHome />}
         authCheck={() =>
           isAuthenticated() && hasRole(userData, "administrador")
         }
