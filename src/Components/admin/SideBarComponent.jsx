@@ -122,4 +122,4 @@ function SideBarComponent({ handleOptionSelect }) {
   );
 }
 
-// export default SideBarComponent;
+export default SideBarComponent;
