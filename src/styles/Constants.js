@@ -13,7 +13,8 @@ export const formStyles = {
   inputField: "border border-gray-500 rounded px-4 py-2 w-full",
   link: "text-blue-500 hover:underline",
   navbar: {
-    nav: "bg-blue-500 sm:bg-green-500 md:bg-red-500 lg:bg-yellow-500 xl:bg-purple-500 bg-custom-green text-white p-4 shadow-lg sticky top-0 z-50",
+    nav: "bg-green-700  bg-custom-green text-white p-4 shadow-lg sticky top-0 z-50",
+    // nav: "bg-blue-500 sm:bg-green-500 md:bg-red-500 lg:bg-yellow-500 xl:bg-purple-500 bg-custom-green text-white p-4 shadow-lg sticky top-0 z-50",
     container: "container mx-auto flex justify-between items-center",
     logo: "h-auto object-cover max-w-6 max-h-6 md:max-w-10 md:max-h-10 lg:max-w-14 lg:max-h-14",
     menu: "flex flex-auto flex-row space-x-4 p-3 md:space-x-6 lg:space-x-10",
