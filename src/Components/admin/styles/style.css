@@ -8,7 +8,6 @@
 }
   /* Estilos para el contenido principal */
 .admin-content {
-    margin-left: 160px;
-    flex: 1;
-    padding: 100px;
+    margin-left: 300px;
+    margin-top: 40px;
 }  
