@@ -3,6 +3,9 @@ import { useNavigate, useLocation, HashRouter, Link } from "react-router-dom";
 import { formStyles } from "../../styles/Constants";
 import { isAuthenticated } from "../../services/authentication/userUtils";
 import { logout } from "../../services/authentication/authUtils";
+import { hasRole } from "../../services/authorization/roleUtils";
+const userDataString = localStorage.getItem("userData"); // Obtiene la cadena JSON de localStorage
+const userData = JSON.parse(userDataString);
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -67,6 +70,11 @@ const Navbar = () => {
           {userIsLoggedIn ? (
             // Mostrar el botón de Cerrar Sesión si el usuario está autenticado
             <div className="flex items-center space-x-2">
+              {hasRole(userData, "administrador") && (
+                <TransparentButton onClick={() => navigate("/admin")}>
+                  Administrar
+                </TransparentButton>
+              )}
               <TransparentButton onClick={() => logout()}>
                 Cerrar Sesión
               </TransparentButton>

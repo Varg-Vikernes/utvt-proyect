@@ -23,8 +23,8 @@ import AdminHome from "../Components/admin/AdminHome";
 
 const userDataString = localStorage.getItem("userData"); // Obtiene la cadena JSON de localStorage
 const userData = JSON.parse(userDataString); // Convierte la cadena JSON en un objeto
-//console.log(isAuthenticated(), userData.rol);
-//console.log(userData)
+
+
 function PrivateRoute({ element, authCheck, fallbackPath }) {
   return authCheck() ? element : <Navigate to={fallbackPath} />;
 }
