@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaEdit, FaTrash } from 'react-icons/fa';
-import PopUpRecetasRegistro from "./Recetas/PopUpRecetasRegistro";
+
 
 function Recetas() {
     const [recetas, setRecetas] = useState([]);
