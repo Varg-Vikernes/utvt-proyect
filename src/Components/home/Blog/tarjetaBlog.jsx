@@ -1,6 +1,6 @@
 import React from "react";
 
-function tarjetaBlog({
+function TarjetaBlog({
   titulo,
   imagenSrc,
   descripcion,
@@ -41,4 +41,4 @@ function tarjetaBlog({
   );
 }
 
-export default tarjetaBlog;
+export default TarjetaBlog;

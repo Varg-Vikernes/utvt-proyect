@@ -18,52 +18,9 @@ const Navbar = () => {
     <nav className={formStyles.navbar.nav}>
       <div className={formStyles.navbar.container}>
         {/* Logo */}
-        <div>
-          <img
-            src="../assets/home/navbar/logo_Q-Spicy.png"
-            alt="Logo de Q-spicy"
-            className={formStyles.navbar.logo}
-          />
-        </div>
 
-        {/* Menú de navegación */}
-        <div className={formStyles.navbar.menu}>
-          <NavLink
-            path="/#bienvenida"
-            currentPath={location.pathname + location.hash}
-            onClick={navigate}
-          >
-            Bienvenido
-          </NavLink>
-          <NavLink
-            path="/#como-surgio-esta-idea"
-            currentPath={location.pathname + location.hash}
-            onClick={navigate}
-          >
-            ¿Cómo Surgió?
-          </NavLink>
-          <NavLink
-            path="/#conocenos"
-            currentPath={location.pathname + location.hash}
-            onClick={navigate}
-          >
-            Conócenos
-          </NavLink>
-          <NavLink
-            path="/#recetario"
-            currentPath={location.pathname + location.hash}
-            onClick={navigate}
-          >
-            Recetario
-          </NavLink>
-          <NavLink
-            path="/#blog"
-            currentPath={location.pathname + location.hash}
-            onClick={navigate}
-          >
-            Blog
-          </NavLink>
-        </div>
+
+  
 
         {/* Botones de inicio de sesión y registro */}
         <div className="flex items-center space-x-2">
@@ -71,8 +28,8 @@ const Navbar = () => {
             // Mostrar el botón de Cerrar Sesión si el usuario está autenticado
             <div className="flex items-center space-x-2">
               {hasRole(userData, "administrador") && (
-                <TransparentButton onClick={() => navigate("/admin")}>
-                  Administrar
+                <TransparentButton onClick={() => navigate("/")}>
+                  Regresar
                 </TransparentButton>
               )}
               <TransparentButton onClick={() => logout()}>
@@ -107,7 +64,7 @@ const Navbar = () => {
 const NavLink = ({ path, currentPath, onClick, children }) => {
   const isActive = currentPath === path;
   const linkClasses = isActive
-    ? "text-white active:text-slate-800 hover:text-custom-green border-b-2 border-white rounded-md font-bold text-16"
+    ? "text-white hover:bg-white hover:text-custom-green border-b-2 border-white rounded-md font-bold text-16"
     : "text-white hover:border-white hover:border-b-2 rounded-s border-transparent border-b-2 font-bold";
 
   return (
