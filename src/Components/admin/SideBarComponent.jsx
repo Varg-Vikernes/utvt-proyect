@@ -10,7 +10,7 @@ function SideBarComponent({ handleOptionSelect }) {
 
 
   return (
-    <div className="side-container">
+    <div className="">
       <button
         data-drawer-target="default-sidebar"
         data-drawer-toggle="default-sidebar"
@@ -39,7 +39,7 @@ function SideBarComponent({ handleOptionSelect }) {
         class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+        <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 mt-20">
           <ul class="space-y-2 font-medium">
             <li>
               <a
