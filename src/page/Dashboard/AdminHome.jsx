@@ -3,6 +3,8 @@ import SideBarComponent from "../../Components/admin/SideBarComponent";
 import Usuarios from "../../Components/admin/User/Usuarios";
 import Recetas from "../../Components/admin/Recipes/Recetas";
 import Blog from "../../Components/admin/Blog/BlogAdmin";
+import NavBarAdmin from "../../Components/admin/NavBarAdmin";
+
 
 
 
@@ -14,11 +16,10 @@ function AdminHome() {
   };
 
   return (
-    <div >
-      
+    <div>
+      <NavBarAdmin />
       <div className="admin-container">
         <SideBarComponent handleOptionSelect={handleOptionSelect} />
-
         <div className="admin-content">
           {selectedOption === "recetas" && <Recetas />}
           {selectedOption === "usuarios" && <Usuarios />}
@@ -26,6 +27,7 @@ function AdminHome() {
         </div>
       </div>
     </div>
+
 
   );
 
