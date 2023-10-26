@@ -38,14 +38,14 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                     aria-hidden="true">
                     &#8203;
                 </span>
-
+                {/* Here is the principal container */}
                 <div
-                    className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                    className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:max-w-4xl sm:w-full h-1/2  "
                     role="dialog"
                     aria-modal="true"
                     aria-labelledby="modal-headline">
-                    <div className="bg-white dark:bg-gray-900">
-                        <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+                    <div className="bg-white dark:bg-gray-900 h-1/2">
+                        <div className="py-8 px-4 mx-auto max-w-3xl lg:py-16">
                             <button
                                 onClick={onClose}
                                 className="absolute top-4 right-4 text-gray-500 hover:text-gray-900">
@@ -130,7 +130,7 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                    class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-green-600 hover:bg-green-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
                                     Add product
                                 </button>
                             </form>
