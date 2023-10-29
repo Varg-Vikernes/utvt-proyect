@@ -1,6 +1,6 @@
 import React from "react";
 import datosDeEjemplo from "./datosDeEjemplo";
-import TarjetaBlog from "./tarjetaBlog";
+import TarjetaBlog from "./TarjetaBlog";
 
 function Blog() {
   return (

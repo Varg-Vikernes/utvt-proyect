@@ -96,7 +96,6 @@ const NavLink = ({ to,  children }) => {
     const navigate = useNavigate()
     const currentPath =window.location.hash;
     const isActive = currentPath === to
-    console.log(currentPath, to, isActive)
     const linkClasses = `text-white font-bold text-16 border-transparent hover:text-custom-green ${
         isActive ? 'border-white' : 'hover:border-white'
     } rounded-s ${isActive ? 'border-b-2' : 'border-b-0'}`
