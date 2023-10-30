@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 
 const FormularioRegistroRecetasPopUp = ({ onClose }) => {
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phoneNumber: '',
+        titulo: '',
+        descripcion: '',
+        ingredientes: '',
+        elaboracion: '',
         department: '',
         company: '',
     })
