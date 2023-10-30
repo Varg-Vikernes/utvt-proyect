@@ -33,9 +33,9 @@ const Navbar = () => {
       if (currentPath && currentPath !== "#" && currentPath[0] === "#") {
         const targetElement = document.querySelector(currentPath);
         if (targetElement) {
-          console.log("Sincronizando con fragmento:", currentPath);
+          // console.log("Sincronizando con fragmento:", currentPath);
+          // console.log("Desplazándose a:", currentPath);
           targetElement.scrollIntoView({ behavior: "smooth" });
-          console.log("Desplazándose a:", currentPath);
         }
       }
     };
@@ -77,6 +77,7 @@ const Navbar = () => {
               <NavLink to="#como-surgio-esta-idea">¿Cómo Surgió?</NavLink>
               <NavLink to="#conocenos">Conócenos</NavLink>
               <NavLink to="#recetario">Recetario</NavLink>
+              <NavLink to="#map">Mapa</NavLink>
               <NavLink to="#blog">Blog</NavLink>
             </div>
           ) : (
@@ -87,6 +88,7 @@ const Navbar = () => {
                 <NavLink to="#como-surgio-esta-idea">¿Cómo Surgió?</NavLink>
                 <NavLink to="#conocenos">Conócenos</NavLink>
                 <NavLink to="#recetario">Recetario</NavLink>
+                <NavLink to="#map">Mapa</NavLink>
                 <NavLink to="#blog">Blog</NavLink>
               </nav>
             </div>
@@ -109,7 +111,7 @@ const Navbar = () => {
             </div>
           ) : (
             // Mostrar botones de Iniciar Sesión y Registrarse si el usuario no está autenticado
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 font-bold text-16">
               {!isLoginPage && (
                 <TransparentButton onClick={() => navigate("/login")}>
                   Iniciar Sesión
@@ -137,7 +139,7 @@ const NavLink = ({ to, children }) => {
   } rounded-s ${isActive ? "border-b-2" : "border-b-0"}`;
 
   const handleClick = () => {
-    navigate(to);
+    navigate("/"+to);
   };
 
   return (

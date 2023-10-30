@@ -45,7 +45,7 @@ function LoginForm({ handleLogin, isLoading }) {
   };
 
   return (
-    <div className={responsiveFormStyles.container}>
+    <div className={formStyles.container}>
       <div className={responsiveFormStyles.formContainer}>
         <h1 className={formStyles.title}>Inicio de Sesión</h1>
         <div className="mb-4">

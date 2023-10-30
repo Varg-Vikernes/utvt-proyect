@@ -7,12 +7,13 @@ function Footer() {
     <footer className="bg-gray-900 py-8">
       <div className="container mx-auto flex flex-col md:flex-row items-center">
         <div className="w-full flex-col md:w-1/3 h-1/3 flex items-center md:block text-left">
-          <img
-            src="../assets/home/navbar/logo_Q-Spicy.png"
+          
+        <div className="text-white font-bold">Q - Spicy</div><img
+            src="../assets/home/image/logo_sinFondo.png"
             alt="Logo de Q-spicy"
             className="w-20 h-20 mx-auto md:mx-0"
           />
-          <div className="text-white font-semibold">Q - Spicy</div>
+          
         </div>
         
         <div className="w-full md:w-1/3 flex flex-col items-center md:items-center justify-center mt-4 md:mt-0">
@@ -48,6 +49,10 @@ function Footer() {
               </li>
             </ul>
           </div>
+    
+        </div>
+        <div className="w-full md:w-1/3 flex flex-col items-center md:items-end text-center mt-4 md:mt-0">
+     
           <div>
             <h2 className="text-white font-semibold">Legal</h2>
             <ul className="mt-2 text-gray-400">
