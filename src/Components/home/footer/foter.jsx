@@ -1,7 +1,6 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa"; // Importa los íconos de react-icons
 
-
 const Footer = () => {
   return (
     <footer className="bg-black text-white py-6">
