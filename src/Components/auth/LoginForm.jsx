@@ -1,11 +1,52 @@
-import React from "react";
+// LoginForm.js
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { formStyles } from "../../styles/Constants";
+import * as Yup from "yup";
+import { formStyles,responsiveFormStyles } from "../../styles/Constants";
 
-function LoginForm({ handleLogin, email, setEmail, password, setPassword }) {
+function LoginForm({ handleLogin, isLoading }) {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async () => {
+    const schema = Yup.object().shape({
+      email: Yup.string()
+        .email("Ingrese un correo electrónico válido")
+        .required("El correo electrónico es requerido"),
+      password: Yup.string().required("La contraseña es requerida"),
+    });
+
+    try {
+      await schema.validate(formData, { abortEarly: false });
+
+      setErrors({ email: "", password: "" });
+      handleLogin(formData.email, formData.password);
+    } catch (error) {
+      const newErrors = {};
+
+      error.inner.forEach((e) => {
+        newErrors[e.path] = e.message;
+      });
+
+      setErrors(newErrors);
+    }
+  };
+
   return (
     <div className={formStyles.container}>
-      <div className={formStyles.formContainer}>
+      <div className={responsiveFormStyles.formContainer}>
         <h1 className={formStyles.title}>Inicio de Sesión</h1>
         <div className="mb-4">
           <label className={formStyles.inputLabel} htmlFor="email">
@@ -15,9 +56,11 @@ function LoginForm({ handleLogin, email, setEmail, password, setPassword }) {
             className={formStyles.inputField}
             type="text"
             id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
           />
+          {errors.email && <div className="text-red-500">{errors.email}</div>}
         </div>
         <div className="mb-4">
           <label className={formStyles.inputLabel} htmlFor="password">
@@ -27,30 +70,39 @@ function LoginForm({ handleLogin, email, setEmail, password, setPassword }) {
             className={formStyles.inputField}
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
           />
+          {errors.password && (
+            <div className="text-red-500">{errors.password}</div>
+          )}
         </div>
         <div className="mb-4 flex items-center justify-between mt-4">
           <div className="mx-2"></div>
-          <label className="text-sm mx-2 text-gray-600">
+          <span className="text-sm text-gray-600">
             <Link to="/recovery_forgot" className={formStyles.link}>
               Recuperar contraseña
             </Link>
-          </label>
-          <label className="text-sm mx-2 text-gray-600">
+          </span>
+          <span className="text-sm text-gray-600 mx-2 md:mx-4 lg:mx-6">|</span>
+          <span className="text-sm text-gray-600">
             <Link to="/register" className={formStyles.link}>
               Registrarse
             </Link>
-          </label>
+          </span>
         </div>
+
         <div className="mt-6">
           <button
-            className={formStyles.button}
+            className={`${
+              isLoading ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500"
+            } text-white py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50`}
             type="button"
-            onClick={handleLogin}
+            onClick={handleSubmit}
+            disabled={isLoading}
           >
-            Iniciar Sesión
+            {isLoading ? "Cargando..." : "Iniciar Sesión"}
           </button>
         </div>
       </div>

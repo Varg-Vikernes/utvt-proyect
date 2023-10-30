@@ -14,17 +14,61 @@ function RegisterForm({ handleRegister, formData, setFormData, error }) {
     });
   };
 
+  const passwordValidationSchema = (customRules = {}) => {
+    const defaultRules = {
+      required: true,
+      min: 6,
+      uppercase: true,
+      lowercase: true,
+      number: true,
+      specialCharacter: true,
+    };
+  
+    const rules = { ...defaultRules, ...customRules };
+  
+    let schema = Yup.string();
+  
+    if (rules.required) {
+      schema = schema.required('La contraseña es requerida');
+    }
+  
+    if (rules.min) {
+      schema = schema.min(rules.min, `La contraseña debe tener al menos ${rules.min} caracteres`);
+    }
+  
+    if (rules.uppercase) {
+      schema = schema.matches(/[A-Z]/, 'La contraseña debe contener al menos una letra mayúscula');
+    }
+  
+    if (rules.lowercase) {
+      schema = schema.matches(/[a-z]/, 'La contraseña debe contener al menos una letra minúscula');
+    }
+  
+    if (rules.number) {
+      schema = schema.matches(/\d/, 'La contraseña debe contener al menos un número');
+    }
+  
+    if (rules.specialCharacter) {
+      schema = schema.matches(/[@$!%*?&]/, 'La contraseña debe contener al menos un carácter especial');
+    }
+  
+    return schema;
+  };
+  
+
   const handleRegisterClick = () => {
     // Valida el formulario utilizando Yup
     const schema = Yup.object().shape({
-      name: Yup.string().required("El nombre es obligatorio"),
       email: Yup.string()
-        .email("Correo electrónico no válido")
-        .required("El correo electrónico es obligatorio"),
-      password: Yup.string()
-        .min(6, "La contraseña debe tener al menos 6 caracteres")
-        .required("La contraseña es obligatoria"),
+        .email('Ingrese un correo electrónico válido')
+        .required('El correo electrónico es requerido'),
+      password: passwordValidationSchema({
+        min: 6, // Personaliza la longitud mínima de la contraseña
+        uppercase: true, // Desactiva la validación de letras mayúsculas
+        specialCharacter: true, // Desactiva la validación de caracteres especiales
+      }),
     });
+    
 
     schema
       .validate(formData, { abortEarly: false })

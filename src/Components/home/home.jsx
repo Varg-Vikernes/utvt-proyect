@@ -4,7 +4,7 @@ const Home = ({ backgroundImage, height, width }) => {
   const containerStyle = {
     minHeight: height || "70vh",
     width: width || "100%",
-    backgroundImage: "url(/assets/home/image/fondo.png)",
+    backgroundImage: `url(${backgroundImage || "/assets/home/image/fondo.png"})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundColor: "rgba(0, 0, 0, 0.5)", // Fondo transparente
@@ -32,14 +32,13 @@ const Home = ({ backgroundImage, height, width }) => {
       <div className="mt-4 space-x-4">
         <a
           href="/#conocenos"
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+          className="bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg hover:bg-opacity-100"
         >
           Reproducir Video
         </a>
         <a
           href="/#como-surgio-esta-idea"
-
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+          className="bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg hover:bg-opacity-100"
         >
           Conócenos
         </a>

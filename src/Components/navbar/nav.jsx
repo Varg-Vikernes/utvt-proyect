@@ -1,5 +1,6 @@
 import React from "react";
-import { useNavigate, useLocation, HashRouter, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { formStyles } from "../../styles/Constants";
 import { isAuthenticated } from "../../services/authentication/userUtils";
 import { logout } from "../../services/authentication/authUtils";
@@ -10,10 +11,39 @@ const userData = JSON.parse(userDataString);
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const currentPath = location.hash;
 
   const userIsLoggedIn = isAuthenticated();
   const isLoginPage = location.pathname === "/login";
   const isRegisterPage = location.pathname === "/register";
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    if (window.innerWidth <= 767) {
+      setIsDropdownOpen(!isDropdownOpen);
+    }
+  };
+
+  // Agregar un efecto para el desplazamiento suave a la ubicación actual
+  useEffect(() => {
+    // Función para sincronizar la ubicación con el fragmento actual
+    const syncLocationWithFragment = () => {
+      const currentPath = location.hash;
+      if (currentPath && currentPath !== "#" && currentPath[0] === "#") {
+        const targetElement = document.querySelector(currentPath);
+        if (targetElement) {
+          // console.log("Sincronizando con fragmento:", currentPath);
+          // console.log("Desplazándose a:", currentPath);
+          targetElement.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    // Sincronizar la ubicación al cargar la página
+    syncLocationWithFragment();
+  }, [location]);
+
   return (
     <nav className={formStyles.navbar.nav}>
       <div className={formStyles.navbar.container}>
@@ -27,42 +57,42 @@ const Navbar = () => {
         </div>
 
         {/* Menú de navegación */}
-        <div className={formStyles.navbar.menu}>
-          <NavLink
-            path="/#bienvenida"
-            currentPath={location.pathname + location.hash}
-            onClick={navigate}
-          >
-            Bienvenido
-          </NavLink>
-          <NavLink
-            path="/#como-surgio-esta-idea"
-            currentPath={location.pathname + location.hash}
-            onClick={navigate}
-          >
-            ¿Cómo Surgió?
-          </NavLink>
-          <NavLink
-            path="/#conocenos"
-            currentPath={location.pathname + location.hash}
-            onClick={navigate}
-          >
-            Conócenos
-          </NavLink>
-          <NavLink
-            path="/#recetario"
-            currentPath={location.pathname + location.hash}
-            onClick={navigate}
-          >
-            Recetario
-          </NavLink>
-          <NavLink
-            path="/#blog"
-            currentPath={location.pathname + location.hash}
-            onClick={navigate}
-          >
-            Blog
-          </NavLink>
+
+        <div className="container mx-auto flex flex-row justify-between items-center space-x-4 p-3 lg:space-x-10">
+          <button onClick={toggleDropdown} className="block md:hidden">
+            Menú
+          </button>
+          {window.innerWidth <= 767 ? (
+            <div
+              className={`
+              md:flex space-y-2 md:space-y-0 ${
+                window.innerWidth <= 767
+                  ? isDropdownOpen
+                    ? "block"
+                    : "hidden"
+                  : "block"
+              }`}
+            >
+              <NavLink to="#bienvenida">Bienvenido</NavLink>
+              <NavLink to="#como-surgio-esta-idea">¿Cómo Surgió?</NavLink>
+              <NavLink to="#conocenos">Conócenos</NavLink>
+              <NavLink to="#recetario">Recetario</NavLink>
+              <NavLink to="#map">Mapa</NavLink>
+              <NavLink to="#blog">Blog</NavLink>
+            </div>
+          ) : (
+            // Renderiza el menú sin importar el estado cuando el ancho de la pantalla es mayor a 767px.
+            <div className="md:block">
+              <nav className="md:flex flex-col md:flex-row space-y-2 md:space-y-0">
+                <NavLink to="#bienvenida">Bienvenido</NavLink>
+                <NavLink to="#como-surgio-esta-idea">¿Cómo Surgió?</NavLink>
+                <NavLink to="#conocenos">Conócenos</NavLink>
+                <NavLink to="#recetario">Recetario</NavLink>
+                <NavLink to="#map">Mapa</NavLink>
+                <NavLink to="#blog">Blog</NavLink>
+              </nav>
+            </div>
+          )}
         </div>
 
         {/* Botones de inicio de sesión y registro */}
@@ -81,7 +111,7 @@ const Navbar = () => {
             </div>
           ) : (
             // Mostrar botones de Iniciar Sesión y Registrarse si el usuario no está autenticado
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 font-bold text-16">
               {!isLoginPage && (
                 <TransparentButton onClick={() => navigate("/login")}>
                   Iniciar Sesión
@@ -100,18 +130,20 @@ const Navbar = () => {
   );
 };
 
-// console.log(location.pathname)
-// console.log(location.hash)
-// console.log(location.pathname+location.hash)
-// Componente para los elementos del menú de navegación
-const NavLink = ({ path, currentPath, onClick, children }) => {
-  const isActive = currentPath === path;
-  const linkClasses = isActive
-    ? "text-white active:text-slate-800 hover:text-custom-green border-b-2 border-white rounded-md font-bold text-16"
-    : "text-white hover:border-white hover:border-b-2 rounded-s border-transparent border-b-2 font-bold";
+const NavLink = ({ to, children }) => {
+  const navigate = useNavigate();
+  const currentPath = window.location.hash;
+  const isActive = currentPath === to;
+  const linkClasses = `block md:inline-block p-2 text-white font-bold text-16 border-transparent hover:text-custom-green ${
+    isActive ? "border-white" : "hover:border-white"
+  } rounded-s ${isActive ? "border-b-2" : "border-b-0"}`;
+
+  const handleClick = () => {
+    navigate("/"+to);
+  };
 
   return (
-    <a className={linkClasses} onClick={() => onClick(path)}>
+    <a href={to} onClick={handleClick} className={linkClasses}>
       {children}
     </a>
   );
