@@ -10,7 +10,7 @@ function TarjetaBlog({
   onBotonLeerMasClick,
 }) {
   return (
-    <div className={`bg-white shadow-md rounded-lg p-4 my-4`}>
+    <div className={`bg-white shadow-md rounded-lg p-4 `}>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="sm:col-span-1">
           <img

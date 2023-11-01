@@ -22,7 +22,7 @@ class RecipeCards extends Component {
       "bg-white rounded-lg p-4 border border-gray-300 shadow-md"; // Estilo de tarjeta con Tailwind CSS
 
     return (
-      <div id="recetario" className="mx-4">
+      <div id="recetario" className="h-screen flex flex-col justify-center items-center">
         {" "}
         {/* Agregar margen a los lados */}
         <h1 className="text-3xl font-bold text-center mb-4">Recetas</h1>
