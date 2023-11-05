@@ -1,27 +1,27 @@
 // frontend/src/Dashboard.jsx
-import React from "react";
-import Navbar from "../../Components/navbar/nav";
-import Home from "../../Components/home/home";
-import Footer from "../../Components/footer/foter";
-import RecipeCards from "../../Components/home/recipes/RecipeCards";
+import React from 'react'
+import Navbar from '../../Components/navbar/nav'
+import Home from '../../Components/home/home'
+import Footer from '../../Components/footer/foter'
+import RecipeCards from '../../Components/home/recipes/RecipeCards'
 // import ProductPage from "../../Components/home/AboutProuct/productpage";
-import MapLocation from "../../Components/home/Locate/mapLocation";
-import Blog from "../../Components/home/Blog/Blog";
-import ComeAbout from "../../Components/home/AboutProuct/ComeAbout";
-import VideoProduct from "../../Components/home/AboutProuct/videoProduct";
+import MapLocation from '../../Components/home/Locate/mapLocation'
+import Blog from '../../Components/home/Blog/Blog'
+import ComeAbout from '../../Components/home/AboutProuct/ComeAbout'
+import VideoProduct from '../../Components/home/AboutProuct/videoProduct'
 function Dashboard() {
-  return (
-    <div>
-      <Navbar />
-      <Home />
-      <ComeAbout />
-      <VideoProduct />
-      <RecipeCards />
-      <MapLocation />
-      <Blog />
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Navbar />
+            <Home />
+            <ComeAbout />
+            <VideoProduct />
+            <RecipeCards />
+            <MapLocation />
+            <Blog />
+            <Footer />
+        </div>
+    )
 }
 
-export default Dashboard;
+export default Dashboard
