@@ -6,11 +6,11 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
         descripcion: '',
         ingredientes: '',
         elaboracion: '',
-        department: '',
-        company: '',
     })
 
-    const handleChange = (e) => {
+    const token = localStorage.getItem('tokenSession')
+
+    const handleInputChange = (e) => {
         const { name, value } = e.target
         setFormData({
             ...formData,
@@ -20,10 +20,38 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // Aquí puedes manejar la lógica de envío del formulario si es necesario
-        // Luego, cierra el modal llamando a la función onClose
-        console.log('Datos del formulario:', formData)
-        onClose()
+
+        // Define la URL de tu API
+        const apiUrl = 'https://backend-proyecto-api-production.up.railway.app/recetas'
+
+        // Configura la solicitud POST
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(formData),
+        }
+
+        // Realiza la solicitud fetch
+        fetch(apiUrl, requestOptions)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Error al enviar la solicitud')
+                }
+                return response.json()
+            })
+            .then((data) => {
+                // La solicitud se realizó con éxito, puedes manejar la respuesta aquí
+                console.log('Respuesta de la API:', data)
+                // Luego, cierra el modal llamando a la función onClose
+                onClose()
+            })
+            .catch((error) => {
+                // Ocurrió un error al enviar la solicitud, puedes manejar el error aquí
+                console.error('Error al enviar la solicitud:', error)
+            })
     }
 
     return (
@@ -77,9 +105,11 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                                             type="text"
                                             name="titulo"
                                             id="titulo"
+                                            value={formData.titulo}
+                                            onChange={handleInputChange}
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             placeholder="Escribe el titulo de la receta"
-                                            required=""
+                                            required="required"
                                         />
                                     </div>
 
@@ -92,7 +122,10 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                                             Descripcion
                                         </label>
                                         <textarea
+                                            name="descripcion"
                                             id="descripcion"
+                                            value={formData.descripcion}
+                                            onChange={handleInputChange}
                                             rows="3"
                                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             placeholder="Agrega una descripción aquí"></textarea>
@@ -107,7 +140,10 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                                             Ingredientes
                                         </label>
                                         <textarea
+                                            name="ingredientes"
                                             id="ingredientes"
+                                            value={formData.ingredientes}
+                                            onChange={handleInputChange}
                                             rows="5"
                                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             placeholder="Agrega una descripción aquí"></textarea>
@@ -122,7 +158,10 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                                             Elaboración
                                         </label>
                                         <textarea
+                                            name="elaboracion"
                                             id="elaboracion"
+                                            value={formData.elaboracion}
+                                            onChange={handleInputChange}
                                             rows="8"
                                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             placeholder="Agrega una descripción aquí"></textarea>
