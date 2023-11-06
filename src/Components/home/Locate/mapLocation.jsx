@@ -5,7 +5,6 @@ class MapLocation extends React.Component {
   // Define las URLs de las imágenes dentro de la clase
   iframeUrl1 =
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.7386917505355!2d-99.46146172479135!3d19.20661228202506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cdf3e07b6d3197%3A0x6dab8371b379acb7!2sUnidad%20Acad%C3%A9mica%20de%20Capulhuac%20%2F%20Universidad%20Tecnol%C3%B3gica%20del%20Valle%20de%20Toluca%20(UTVT)!5e0!3m2!1ses!2smx!4v1698830131088!5m2!1ses!2smx";
-
   imageUrl1 =
     "https://s3.amazonaws.com/ciudad.mapasdemexico.com.mx/mapa-capulhuac-mexico.jpg";
   imageUrl2 =
@@ -96,7 +95,7 @@ class MapLocation extends React.Component {
                   <img
                     src={selectedImage.src}
                     alt="Imagen"
-                    className="w-full max-h-96 mx-auto"
+                    className="w-full max-h-96 mx-auto rounded-xl"
                   />
                 ) : (
                   <iframe
@@ -129,7 +128,7 @@ class MapLocation extends React.Component {
                   <img
                     src={image.id === 1 ? image.srci : image.src}
                     alt="Imagen"
-                    className={`w-32 h-32 cursor-pointer ${
+                    className={`w-32 h-32 rounded-xl cursor-pointer ${
                       selectedImage === image ? "border-4 border-green-500" : ""
                     }`}
                     onClick={() => this.handleImageClick(image)}
@@ -146,7 +145,7 @@ class MapLocation extends React.Component {
                   key={image.id}
                   src={image.id === 1 ? image.srci : image.src}
                   alt="Imagenes"
-                  className={`w-32 h-32 cursor-pointer ${
+                  className={`w-32 h-32 rounded-xl cursor-pointer ${
                     selectedImage === image ? "border-4 border-green-500" : ""
                   }`}
                   onClick={() => this.handleImageClick(image)}
