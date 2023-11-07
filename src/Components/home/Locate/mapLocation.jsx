@@ -7,14 +7,6 @@ class MapLocation extends React.Component {
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.7386917505355!2d-99.46146172479135!3d19.20661228202506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cdf3e07b6d3197%3A0x6dab8371b379acb7!2sUnidad%20Acad%C3%A9mica%20de%20Capulhuac%20%2F%20Universidad%20Tecnol%C3%B3gica%20del%20Valle%20de%20Toluca%20(UTVT)!5e0!3m2!1ses!2smx!4v1698830131088!5m2!1ses!2smx";
   imageUrl1 =
     "https://s3.amazonaws.com/ciudad.mapasdemexico.com.mx/mapa-capulhuac-mexico.jpg";
-  imageUrl2 =
-    "https://utvt.edomex.gob.mx/sites/utvt.edomex.gob.mx/files/images/1%20ACERCA%20DE%20LA%20UTVT/1.11%20UNIDAD%20ACAD%C3%89MICA%20CAPULHUAC/CAPULHUAC-01.png";
-  imageUrl3 =
-    "https://3.bp.blogspot.com/-7gQ-cq929rc/V9GRmGHd6zI/AAAAAAAAbOY/C1rz1H07DGcWieEyaZXfZC5Zgq98N0FEwCLcB/s1600/Lerma.%2BUTVT%2B%252833%2529.jpg";
-  imageUrl4 =
-    "https://th.bing.com/th/id/iFthClJcrUpRATGdlxO0yQHaHa?pid=ImgDet&rs=1";
-  imageUrl5 =
-    "https://th.bing.com/th/id/R.201c413ec16685b43a66295ba82d25cf?rik=0nPyRbMzFu%2fvkw&pid=ImgRaw&r=0";
 
   // Función para redirigir a Google Maps
   handleRedirectToGoogleMaps = () => {
@@ -32,26 +24,26 @@ class MapLocation extends React.Component {
       },
       {
         id: 2,
-        src: this.imageUrl2,
-        description: "Descripción 2",
+        src: "assets/home/map/referencia_2.jpg",
+        description: "Ruta hacia el campo interior",
         type: "image",
       },
       {
         id: 3,
-        src: this.imageUrl3,
-        description: "Descripción 3",
+        src: "assets/home/map/referencia_3.jpg",
+        description: "Calle para salida",
         type: "image",
       },
       {
         id: 4,
-        src: this.imageUrl4,
-        description: "Descripción 4",
+        src: "assets/home/map/referencia_4.jpg",
+        description: "Vista de Interior",
         type: "image",
       },
       {
         id: 5,
-        src: this.imageUrl5,
-        description: "Descripción 5",
+        src: "assets/home/map/referencia_5.jpg",
+        description: "Vista exterior de noche",
         type: "image",
       },
       // Agrega aquí más imágenes si es necesario

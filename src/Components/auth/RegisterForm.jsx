@@ -4,7 +4,7 @@ import { formStyles } from "../../styles/Constants";
 import * as Yup from "yup"; // Importa la biblioteca Yup para validación
 
 function RegisterForm({ handleRegister, formData, setFormData, error }) {
-  const { name, email, password, } = formData;
+  const { name, email, password } = formData;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,52 +23,65 @@ function RegisterForm({ handleRegister, formData, setFormData, error }) {
       number: true,
       specialCharacter: true,
     };
-  
+
     const rules = { ...defaultRules, ...customRules };
-  
+
     let schema = Yup.string();
-  
+
     if (rules.required) {
-      schema = schema.required('La contraseña es requerida');
+      schema = schema.required("La contraseña es requerida");
     }
-  
+
     if (rules.min) {
-      schema = schema.min(rules.min, `La contraseña debe tener al menos ${rules.min} caracteres`);
+      schema = schema.min(
+        rules.min,
+        `La contraseña debe tener al menos ${rules.min} caracteres`
+      );
     }
-  
+
     if (rules.uppercase) {
-      schema = schema.matches(/[A-Z]/, 'La contraseña debe contener al menos una letra mayúscula');
+      schema = schema.matches(
+        /[A-Z]/,
+        "La contraseña debe contener al menos una letra mayúscula"
+      );
     }
-  
+
     if (rules.lowercase) {
-      schema = schema.matches(/[a-z]/, 'La contraseña debe contener al menos una letra minúscula');
+      schema = schema.matches(
+        /[a-z]/,
+        "La contraseña debe contener al menos una letra minúscula"
+      );
     }
-  
+
     if (rules.number) {
-      schema = schema.matches(/\d/, 'La contraseña debe contener al menos un número');
+      schema = schema.matches(
+        /\d/,
+        "La contraseña debe contener al menos un número"
+      );
     }
-  
+
     if (rules.specialCharacter) {
-      schema = schema.matches(/[@$!%*?&]/, 'La contraseña debe contener al menos un carácter especial');
+      schema = schema.matches(
+        /[@$!%*?&]/,
+        "La contraseña debe contener al menos un carácter especial"
+      );
     }
-  
+
     return schema;
   };
-  
 
   const handleRegisterClick = () => {
     // Valida el formulario utilizando Yup
     const schema = Yup.object().shape({
       email: Yup.string()
-        .email('Ingrese un correo electrónico válido')
-        .required('El correo electrónico es requerido'),
+        .email("Ingrese un correo electrónico válido")
+        .required("El correo electrónico es requerido"),
       password: passwordValidationSchema({
         min: 6, // Personaliza la longitud mínima de la contraseña
         uppercase: true, // Desactiva la validación de letras mayúsculas
         specialCharacter: true, // Desactiva la validación de caracteres especiales
       }),
     });
-    
 
     schema
       .validate(formData, { abortEarly: false })

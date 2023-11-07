@@ -16,7 +16,8 @@ const datosDeEjemplo = [
 
   {
     titulo: "Elaboracion de nuestro queso ",
-    imagenSrc: "https://4.bp.blogspot.com/-rGINeSCBXl8/WzAZfgJCf7I/AAAAAAAAJxc/DMrSRbiFDRgVTwC0SIny_ERBtpwz2gQFgCEwYBhgL/w1200-h630-p-k-no-nu/elaboracion-queso-roncal-paso-a-paso-1.png",
+    imagenSrc:
+      "https://4.bp.blogspot.com/-rGINeSCBXl8/WzAZfgJCf7I/AAAAAAAAJxc/DMrSRbiFDRgVTwC0SIny_ERBtpwz2gQFgCEwYBhgL/w1200-h630-p-k-no-nu/elaboracion-queso-roncal-paso-a-paso-1.png",
     descripcion:
       "Procesos quimicos y demas para la creacion del queso ademas de moldeo y proceso de empaquetado ",
     mostrarBotonLeerMas: false, // Sin botón "Leer Más"
@@ -27,7 +28,8 @@ const datosDeEjemplo = [
   },
   {
     titulo: "Consejos para una buena comida ",
-    imagenSrc: "https://enterateahora.com.mx/wp-content/uploads/2016/10/bigstock-140524295.jpg",
+    imagenSrc:
+      "https://enterateahora.com.mx/wp-content/uploads/2016/10/bigstock-140524295.jpg",
     descripcion:
       "Aprende ricas recetas para alcanzar el platillo que que tanto deseas y aun precio bajo para su consumo .",
     mostrarBotonLeerMas: false, // Sin botón "Leer Más"
