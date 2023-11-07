@@ -8,18 +8,31 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
         elaboracion: '',
     })
 
+    const [selectedImage, setSelectedImage] = useState(null) // Agregamos el estado para la imagen
     const token = localStorage.getItem('tokenSession')
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target
-        setFormData({
-            ...formData,
-            [name]: value,
-        })
+        const { name, value, files } = e.target
+        if (name === 'imagen' && files.length > 0) {
+            setSelectedImage(files[0])
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value,
+            })
+        }
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        // Crea un objeto FormData para enviar la imagen junto con otros datos del formulario
+        const formDataWithImage = new FormData()
+        formDataWithImage.append('titulo', formData.titulo)
+        formDataWithImage.append('descripcion', formData.descripcion)
+        formDataWithImage.append('ingredientes', formData.ingredientes)
+        formDataWithImage.append('elaboracion', formData.elaboracion)
+        formDataWithImage.append('imagen', selectedImage)
 
         // Define la URL de tu API
         const apiUrl = 'https://backend-proyecto-api-production.up.railway.app/recetas'
@@ -28,12 +41,12 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
         const requestOptions = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify(formData),
+            body: formDataWithImage,
         }
 
+        console.log(formData) // Agregar esto para depurar
         // Realiza la solicitud fetch
         fetch(apiUrl, requestOptions)
             .then((response) => {
@@ -91,11 +104,11 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                                 </svg>
                             </button>
                             <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-                                Add a new product
+                                Agregar nueva receta
                             </h2>
                             <form onSubmit={handleSubmit}>
                                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                                    <div class="sm:col-span-2">
+                                    <div class="w-full">
                                         <label
                                             htmlFor="titulo"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -108,27 +121,26 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                                             value={formData.titulo}
                                             onChange={handleInputChange}
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Escribe el titulo de la receta"
-                                            required="required"
+                                            placeholder="Titulo de la Receta"
+                                            required=""
                                         />
                                     </div>
-
-                                    <div class="sm:col-span-2">
+                                    <div class="w-full">
                                         <label
-                                            type="text"
-                                            name="descripcion"
                                             htmlFor="descripcion"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            Descripcion
+                                            Descripción
                                         </label>
-                                        <textarea
+                                        <input
+                                            type="text"
                                             name="descripcion"
                                             id="descripcion"
                                             value={formData.descripcion}
                                             onChange={handleInputChange}
-                                            rows="3"
-                                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Agrega una descripción aquí"></textarea>
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Escribe una corta descripción"
+                                            required=""
+                                        />
                                     </div>
 
                                     <div class="sm:col-span-2">
@@ -144,9 +156,12 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                                             id="ingredientes"
                                             value={formData.ingredientes}
                                             onChange={handleInputChange}
-                                            rows="5"
+                                            rows="4"
                                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Agrega una descripción aquí"></textarea>
+                                            placeholder=" 1.-
+                                            2.- 
+                                            3.- 
+                                            Agrega cuantos necesites :D "></textarea>
                                     </div>
 
                                     <div class="sm:col-span-2">
@@ -162,15 +177,58 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                                             id="elaboracion"
                                             value={formData.elaboracion}
                                             onChange={handleInputChange}
-                                            rows="8"
+                                            rows="4"
                                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Agrega una descripción aquí"></textarea>
+                                            placeholder=" Paso 1:
+                                            Paso 2: 
+                                            Paso 3: 
+                                            Agrega los que sean necesarios :)"></textarea>
+                                    </div>
+
+                                    {/* Aqui se incluye el campo para la carga de archivos. */}
+                                    <div class="flex items-center justify-center w-full sm:col-span-2">
+                                        <label
+                                            htmlFor="imagen"
+                                            class="flex flex-col items-center justify-center w-full h-22 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                <svg
+                                                    class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                    aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 20 16">
+                                                    <path
+                                                        stroke="currentColor"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                                                    />
+                                                </svg>
+                                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                    <span class="font-semibold">
+                                                        Click to upload
+                                                    </span>{' '}
+                                                    or drag and drop
+                                                </p>
+                                                <p class="text-xs text-gray-500 dark:text-gray-400">
+                                                    SVG, PNG, JPG or GIF (MAX. 800x400px)
+                                                </p>
+                                            </div>
+                                            <input
+                                                onChange={handleInputChange}
+                                                name="imagen"
+                                                id="imagen"
+                                                type="file"
+                                                class="hidden"
+                                            />
+                                        </label>
                                     </div>
                                 </div>
                                 <button
                                     type="submit"
                                     class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-green-600 hover:bg-green-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                                    Add product
+                                    Agregar Receta
                                 </button>
                             </form>
                         </div>
