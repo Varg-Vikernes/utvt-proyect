@@ -96,7 +96,7 @@ class RecipeList extends Component {
     }
 
     return (
-      <div className="m-4">
+      <div id="recetario" className="m-4">
         <div className="flex space-x-4 mb-4">
           {tags.map((tag) => (
             <span
