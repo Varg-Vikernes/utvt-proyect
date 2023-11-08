@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Blog from "./Blog"; // Importa el componente Blog
-import { fetchPublications } from "../../../services/http/publicationRequest"; // Importa la función de solicitud de publicaciones
+import Blog from "./Blog";
+import { fetchPublications } from "../../../services/http/publicationRequest";
 
 const BlogContainer = () => {
   const [posts, setPosts] = useState([]);

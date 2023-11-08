@@ -3,9 +3,11 @@ import BlogPost from "./BlogPost";
 
 const BlogList = ({ posts }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div >
       {posts.map((post) => (
-        <BlogPost key={post.idPublicacion} post={post} />
+        <div key={post.idPublicacion} className="w-full">
+          <BlogPost post={post} />
+        </div>
       ))}
     </div>
   );

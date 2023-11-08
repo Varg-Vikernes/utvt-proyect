@@ -6,7 +6,7 @@ import Footer from '../../Components/footer/foter'
 import RecipeList from '../../Components/home/recipes/RecipeList'
 // import ProductPage from "../../Components/home/AboutProuct/productpage";
 import MapLocation from '../../Components/home/Locate/mapLocation'
-import Blog from '../../Components/home/Blog/Blog'
+import Blog from '../../Components/home/Blog/BlogContainer'
 import ComeAbout from '../../Components/home/AboutProuct/ComeAbout'
 import VideoProduct from '../../Components/home/AboutProuct/videoProduct'
 function Dashboard() {
