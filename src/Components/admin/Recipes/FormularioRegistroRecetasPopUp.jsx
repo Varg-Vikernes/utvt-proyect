@@ -15,6 +15,7 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
         const { name, value, files } = e.target
         if (name === 'imagen' && files.length > 0) {
             setSelectedImage(files[0])
+            setFileUploaded(false) // Reinicia el estado de carga del archivo
         } else {
             setFormData({
                 ...formData,
@@ -25,6 +26,8 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        setFileUploading(true) // Inicia la carga del archivo
 
         // Crea un objeto FormData para enviar la imagen junto con otros datos del formulario
         const formDataWithImage = new FormData()
@@ -60,12 +63,19 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                 console.log('Respuesta de la API:', data)
                 // Luego, cierra el modal llamando a la función onClose
                 onClose()
+
+                setFileUploading(false) // La carga del archivo ha finalizado
+                setFileUploaded(true) // El archivo ha sido cargado por completo
             })
             .catch((error) => {
                 // Ocurrió un error al enviar la solicitud, puedes manejar el error aquí
                 console.error('Error al enviar la solicitud:', error)
             })
     }
+
+    /* Se agregaron 2 nuevos estados para rastrear si la carga del archivo esta en curso o ya a finalizado */
+    const [fileUploading, setFileUploading] = useState(false)
+    const [fileUploaded, setFileUploaded] = useState(false)
 
     return (
         <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -225,6 +235,18 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                                         </label>
                                     </div>
                                 </div>
+                                {fileUploading && (
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                                        Cargando archivo...
+                                    </p>
+                                )}
+
+                                {fileUploaded && (
+                                    <p className="text-sm text-green-500 dark:text-green-400">
+                                        Archivo cargado con éxito.
+                                    </p>
+                                )}
+
                                 <button
                                     type="submit"
                                     class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-green-600 hover:bg-green-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
