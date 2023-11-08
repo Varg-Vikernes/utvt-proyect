@@ -3,9 +3,9 @@ import React from 'react'
 const VideoProduct = () => {
     return (
         <div id="conocenos" className="h-screen flex flex-col justify-center items-center ">
-            <h2 className="text-4xl font-bold text-center mb-4">
-                Descubre más sobre nuestro producto explorando el siguiente video.
-            </h2>
+            <h1 className="text-4xl font-bold text-center mb-4">
+                Te Invitamos a conocer mas sobre nuestro producto, mirando el siguiente video.
+            </h1>
             <div className="h-3/4 w-11/12 bg-white flex items-center justify-center">
                 <iframe
                     className="w-full h-full object-cover rounded-xl"
