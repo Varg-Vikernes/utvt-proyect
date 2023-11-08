@@ -1,47 +1,73 @@
 import React from "react";
 
-const Home = ({ backgroundImage, height, width }) => {
+const Home = ({ imageUrl, imageUrl2 }) => {
   const containerStyle = {
-    minHeight: height || "70vh",
-    width: width || "100%",
-    backgroundImage: `url(${backgroundImage || "/assets/home/image/fondo.png"})`,
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Fondo transparente
+    display: "flex",
+    alignItems: "center",
+    width: "100%",
   };
 
   const textStyle = {
-    color: "white", // Color del texto en blanco
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    padding: "20px",
+    backgroundColor: "white",
+    textAlign: "center",
+    height: "300px"
   };
 
-  return (
-    <div
-      style={containerStyle}
-      className="flex justify-center items-center flex-col text-center"
-      id="bienvenida"
-    >
-      {/* Mensaje de Bienvenida */}
-      <h1 className="text-4xl font-bold" style={textStyle}>
-        ¡Bienvenido a nuestra aplicación!
-      </h1>
-      <h3 className="text-xl mt-4" style={textStyle}>
-        Descubre lo que podemos ofrecerte.
-      </h3>
 
-      {/* Botones */}
-      <div className="mt-4 space-x-4">
-        <a
-          href="/#conocenos"
-          className="bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg hover:bg-opacity-100"
-        >
-          Reproducir Video
-        </a>
-        <a
-          href="/#como-surgio-esta-idea"
-          className="bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg hover:bg-opacity-100"
-        >
-          Conócenos
-        </a>
+  const imageStyle = {
+    flex: 1,
+    width: "500px", // Ajusta el ancho de la imagen a 400px
+    display: "flex",
+    justifyContent: "center", // Centra la imagen horizontalmente
+  };
+  const imageStyleBarra = {
+    flex: 1,
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column", // Cambia la dirección a "column" para mostrar la imagen debajo
+  };
+
+
+
+
+  return (
+    <div className="text-center" id="bienvenida">
+      <div style={containerStyle}>
+        <div style={textStyle}>
+          <h1 className="text-4xl font-bold" style={{ color: "black" }}>
+            ¡Bienvenido a nuestra aplicación!
+          </h1>
+          <h3 className="text-xl mt-4" style={{ color: "black" }}>
+            Descubre lo que podemos ofrecerte.
+          </h3>
+          <div className="mt-4 space-x-4">
+            <a
+              href="/#conocenos"
+              className="bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg hover:bg-opacity-100"
+            >
+              Reproducir Video
+            </a>
+            <a
+              href="/#como-surgio-esta-idea"
+              className="bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg hover.bg-opacity-100"
+            >
+              Conócenos
+            </a>
+          </div>
+        </div>
+        <div style={imageStyle}>
+          <img src="/assets/home/image/fondo.png" alt="" />
+        </div>
+      </div>
+      <div style={imageStyleBarra}>
+        <img src="/assets/home/image/barra.png" alt="" />
+
       </div>
     </div>
   );
