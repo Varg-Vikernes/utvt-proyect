@@ -1,7 +1,7 @@
 // src/services/publicationRequest.js
 import { savePublicationsLocally, getPublicationsLocally } from '../util/publicaccionesUtils'
 
-const API_BASE_URL = 'http://localhost:4000/publicacion'
+const API_BASE_URL = 'http://backend-proyecto-api-production.up.railway.app/publicacion'
 
 export const fetchPublications = async () => {
     try {
