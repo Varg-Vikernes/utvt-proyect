@@ -1,19 +1,42 @@
 import React, { useEffect, useState } from 'react'
 import { FaEdit, FaTrash } from 'react-icons/fa'
 import FormularioRegistroRecetasPopUp from './FormularioRegistroRecetasPopUp'
+import FormularioEditarRecetasPopUp from './FormularioEditarRecetasPopUp'
 
 function Recetas() {
     const [recetas, setRecetas] = useState([])
     const [loading, setLoading] = useState(true)
 
-    const [isFormOpen, setFormOpen] = useState(false)
+    /* Modals para el Registro de Receta */
+    const [isFormOpen, setFormOpenRegistro] = useState(false)
 
-    const openForm = () => {
-        setFormOpen(true)
+    const openFormRegistro = () => {
+        setFormOpenRegistro(true)
     }
 
     const closeForm = () => {
-        setFormOpen(false)
+        setFormOpenRegistro(false)
+    }
+
+    /* Modals para la edicion de Receta */
+
+    const [isFormEditOpen, setFormOpenEdicion] = useState(false)
+
+    const openFormEdicion = () => {
+        setFormOpenEdicion(true)
+    }
+
+    const closeFormEdicion = () => {
+        setFormOpenEdicion(false)
+    }
+
+    // Nuevo estado para el ID de la receta seleccionada
+    const [selectedRecipe, setSelectedRecipe] = useState(null) // Estado para la receta seleccionada
+
+    // Cuando el usuario haga clic en "Edit", establece la receta seleccionada y abre el formulario de edición
+    const handleEditClick = (receta) => {
+        setSelectedRecipe(receta)
+        openFormEdicion()
     }
 
     useEffect(() => {
@@ -55,7 +78,7 @@ function Recetas() {
                             Acciones
                             <div>
                                 <button
-                                    onClick={openForm}
+                                    onClick={openFormRegistro}
                                     type="button"
                                     className="w-1/2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
                                     <svg
@@ -68,7 +91,7 @@ function Recetas() {
                                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                             clipRule="evenodd"></path>
                                     </svg>
-                                    Add user
+                                    Agregar
                                 </button>
                                 {isFormOpen && (
                                     <FormularioRegistroRecetasPopUp
@@ -90,11 +113,12 @@ function Recetas() {
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {receta.titulo}
                             </th>
-                            <td class="px-6 py-4 text-base ">{receta.descripcion}</td>
-                            <td class="px-6 py-4 text-base">{receta.ingredientes}</td>
-                            <td class="px-6 py-4 text-base">{receta.elaboracion}</td>
+                            <td class="px-6 py-4 text-base text-justify">{receta.descripcion}</td>
+                            <td class="px-6 py-4 text-base text-justify">{receta.ingredientes}</td>
+                            <td class="px-6 py-4 text-base text-justify">{receta.elaboracion}</td>
                             <td class="p-4 whitespace-nowrap space-x-2">
                                 <button
+                                    onClick={() => handleEditClick(receta)} // Llama a handleEditClick con la receta seleccionada
                                     type="button"
                                     data-modal-toggle="user-modal"
                                     class="text-white bg-cyan-600 hover:bg-cyan-700  font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
@@ -109,8 +133,18 @@ function Recetas() {
                                             d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    Edit
+                                    Editar
                                 </button>
+                                {selectedRecipe && ( // Muestra el formulario de edición si hay una receta seleccionada
+                                    <FormularioEditarRecetasPopUp
+                                        isOpen={isFormEditOpen}
+                                        onClose={() => {
+                                            closeFormEdicion()
+                                            setSelectedRecipe(null)
+                                        }}
+                                        recipe={selectedRecipe} // Pasa la receta seleccionada al formulario de edición
+                                    />
+                                )}
 
                                 <button
                                     type="button"
@@ -126,7 +160,7 @@ function Recetas() {
                                             d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    Delete
+                                    Borrar
                                 </button>
                             </td>
                         </tr>
