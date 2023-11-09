@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Blog from "./Blog";
 import { fetchPublications } from "../../../services/http/publicationRequest";
-
+import { getPublicationsLocally } from "../../../services/util/publicaccionesUtils";
 const BlogContainer = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {

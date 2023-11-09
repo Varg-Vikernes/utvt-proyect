@@ -2,8 +2,7 @@ import React from "react";
 import BlogList from "./BlogList";
 
 const Blog = ({ posts }) => {
-  console.log(posts.length);
-  console.log(posts);
+
   return (
     <div className="container mx-auto p-4">
       <div id="blog">

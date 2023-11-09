@@ -1,15 +1,10 @@
 // src/services/publicationRequest.js
 import { savePublicationsLocally, getPublicationsLocally } from '../util/publicaccionesUtils'
 
-const API_BASE_URL = 'https://backend-proyecto-api-production.up.railway.app/publicacion'
+const API_BASE_URL = 'http://localhost:4000/publicacion'
 
 export const fetchPublications = async () => {
     try {
-        const localData = getPublicationsLocally()
-
-        if (localData) {
-            return localData
-        }
 
         const response = await fetch(API_BASE_URL, {
             method: 'GET',
@@ -26,7 +21,7 @@ export const fetchPublications = async () => {
 
         const publicationData = await response.json()
         savePublicationsLocally(publicationData)
-
+        console.log("ingformaccion de hhtp",publicationData );
         return publicationData
     } catch (error) {
         throw error
