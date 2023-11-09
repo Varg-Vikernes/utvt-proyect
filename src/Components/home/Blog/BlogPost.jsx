@@ -7,9 +7,8 @@ const BlogPost = ({ post }) => {
   const toggleDetail = () => {
     setShowDetail(!showDetail);
   };
-  post.fotoURL ="https://storage.googleapis.com/q-spicy_bucket/publicacion/receta12";
-  // Verifica si post.imagenBlob es un blob válido
-  const isValid = post.fotoURL;
+
+  const isValid = post.fotoUrl;
 
   return (
     <div>
@@ -20,7 +19,7 @@ const BlogPost = ({ post }) => {
         <div className="flex">
           <div className="w-1/4">
             <img
-              src={isValid ? post.fotoURL : "assets/home/image/Imagen_no_encontrada.jpg"}
+              src={isValid ? post.fotoUrl : "assets/home/image/Imagen_no_encontrada.jpg"}
               alt={post.titulo}
               className="w-full h-auto"
             />
