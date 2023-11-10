@@ -33,6 +33,7 @@ export const createPublication = async (publicationData) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(publicationData),
         })
@@ -56,6 +57,7 @@ export const updatePublication = async (id, publicationData) => {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(publicationData),
         })
