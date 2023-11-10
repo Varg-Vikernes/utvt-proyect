@@ -1,11 +1,10 @@
 // src/services/publicationRequest.js
-import { savePublicationsLocally, getPublicationsLocally } from '../util/publicaccionesUtils'
 
+const token = localStorage.getItem("tokenSession");
 const API_BASE_URL = 'http://backend-proyecto-api-production.up.railway.app/publicacion'
 
 export const fetchPublications = async () => {
     try {
-
         const response = await fetch(API_BASE_URL, {
             method: 'GET',
             headers: {
@@ -20,8 +19,8 @@ export const fetchPublications = async () => {
         }
 
         const publicationData = await response.json()
-        savePublicationsLocally(publicationData)
-        console.log("ingformaccion de hhtp",publicationData );
+        localStorage.setItem('publicationData', JSON.stringify(publicationData))
+
         return publicationData
     } catch (error) {
         throw error
@@ -75,9 +74,17 @@ export const updatePublication = async (id, publicationData) => {
 }
 
 export const deletePublication = async (id) => {
+
     try {
+        if (!token) {
+            throw new Error('Token de autorización no disponible.')
+        }
+
         const response = await fetch(`${API_BASE_URL}/${id}`, {
             method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
         })
 
         if (!response.ok) {
