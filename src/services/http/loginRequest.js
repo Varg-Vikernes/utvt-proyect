@@ -29,6 +29,7 @@ export const loginRequest = async (email, password, customHeaders = {}) => {
             localStorage.setItem('tokenSession', responseData.token)
             localStorage.setItem('id', responseData.user.idUsuario)
             localStorage.setItem('nombre', responseData.user.nombre)
+            localStorage.setItem('dateCurrent', responseData.dateCurrent)
             //console.log(responseData)
             return true
         }

@@ -3,12 +3,15 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { formStyles } from "../../styles/Constants";
 import { isAuthenticated } from "../../services/authentication/userUtils";
-import { logout } from "../../services/authentication/authUtils";
+import { logout, checkLogout } from "../../services/authentication/authUtils";
 import {
   hasRole,
   userDataString,
 } from "../../services/authorization/roleUtils";
 const userData = JSON.parse(userDataString());
+
+// Llamar a la función para verificar el logout
+checkLogout();
 
 const Navbar = () => {
   const token = localStorage.getItem("tokenSession");
