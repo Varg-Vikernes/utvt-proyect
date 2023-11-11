@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Blog from "./Blog";
 import { fetchPublications } from "../../../services/http/publicationRequest";
-import { getPublicationsLocally } from "../../../services/util/publicaccionesUtils";
+
 const BlogContainer = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+  const [visiblePosts, setVisiblePosts] = useState(5);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -20,9 +21,31 @@ const BlogContainer = () => {
     fetchData();
   }, []);
 
+  const showMorePosts = () => {
+    setVisiblePosts((prevVisiblePosts) => prevVisiblePosts + 5);
+  };
+
+  const showLessPosts = () => {
+    setVisiblePosts((prevVisiblePosts) => Math.max(prevVisiblePosts - 5, 0));
+  };
+
+  const sortPosts = (compareFunction) => {
+    const sortedPosts = [...posts].sort(compareFunction);
+    setPosts(sortedPosts);
+  };
+
   return (
     <div>
-      {loading ? <p>Cargando publicaciones...</p> : <Blog posts={posts} />}
+      {loading ? (
+        <p>Cargando publicaciones...</p>
+      ) : (
+        <Blog
+          posts={posts.slice(0, visiblePosts)}
+          showMorePosts={showMorePosts}
+          showLessPosts={showLessPosts}
+          sortPosts={sortPosts}
+        />
+      )}
     </div>
   );
 };

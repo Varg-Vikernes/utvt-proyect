@@ -3,9 +3,9 @@ import BlogPost from "./BlogPost";
 
 const BlogList = ({ posts }) => {
   return (
-    <div >
+    <div>
       {posts.map((post) => (
-        <div key={post.idPublicacion} className="w-full">
+        <div key={post.idPublicacion} className="mb-4">
           <BlogPost post={post} />
         </div>
       ))}

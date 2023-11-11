@@ -55,18 +55,18 @@ const Home = ({ imageUrl, imageUrl2 }) => {
             </a>
             <a
               href="/#como-surgio-esta-idea"
-              className="bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg hover.bg-opacity-100"
+              className="bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg hover:bg-opacity-100"
             >
               Conócenos
             </a>
           </div>
         </div>
-        <div style={imageStyle}>
-          <img src="/assets/home/image/fondo.png" alt="" />
+        <div className="w-80 h-80 p-4" style={imageStyle}>
+          <img src="/assets/home/image/QV - Inicio.png" alt="" />
         </div>
       </div>
       <div style={imageStyleBarra}>
-        <img src="/assets/home/image/barra.png" alt="" />
+        <img src="/assets/home/image/barra-sf.png" alt="" />
 
       </div>
     </div>

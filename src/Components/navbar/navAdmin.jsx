@@ -24,11 +24,10 @@ const Navbar = () => {
           {userIsLoggedIn ? (
             // Mostrar el botón de Cerrar Sesión si el usuario está autenticado
             <div className="flex items-center space-x-2">
-              {hasRole(userData, "administrador") && (
-                <TransparentButton onClick={() => navigate("/")}>
-                  Regresar
-                </TransparentButton>
-              )}
+              <TransparentButton onClick={() => navigate("/")}>
+                Regresar
+              </TransparentButton>
+
               <TransparentButton onClick={() => logout()}>
                 Cerrar Sesión
               </TransparentButton>
