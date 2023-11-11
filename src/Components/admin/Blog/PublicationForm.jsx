@@ -104,7 +104,8 @@ const PublicationForm = ({
         const convertedImage = await convertImage(imageFile);
         const croppedImage = await cropImageTo16x9(convertedImage);
 
-        imageUrl = await handleImageUpload(croppedImage);
+        //imageUrl = await handleImageUpload(croppedImage);
+        
         // Solo continuar si la carga de la imagen fue exitosa
         if (imageUrl === null) {
           console.error("Error al cargar la imagen");
@@ -116,6 +117,13 @@ const PublicationForm = ({
 
       if (isEditing) {
         await updatePublication(formData.idPublicacion, formData);
+         // Verifica si la respuesta tiene un id 
+         if (response.idPublicacion) {
+            await handleImageUpload(croppedImage);
+          } else {
+            console.error("Error al crear la publicación");
+            return;
+          }
       } else {
         const response = await createPublication(formData);
 

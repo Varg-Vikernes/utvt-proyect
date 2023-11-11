@@ -19,9 +19,6 @@ const Navbar = () => {
       <div className={formStyles.navbar.container}>
         {/* Logo */}
 
-
-  
-
         {/* Botones de inicio de sesión y registro */}
         <div className="flex items-center space-x-2">
           {userIsLoggedIn ? (

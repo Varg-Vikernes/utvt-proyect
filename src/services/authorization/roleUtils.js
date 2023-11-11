@@ -7,10 +7,13 @@
  * @returns {boolean} - true si el usuario tiene el rol especificado, false de lo contrario.
  */
 export function hasRole(user, role) {
-  if (user && user.rol) {
-    return user.rol === role;
-  }
-  return false;
+    if (user && user.rol) {
+        return user.rol === role
+    }
+    return false
+}
+export function userDataString() {
+    return localStorage.getItem('userData')
 }
 
 /**
@@ -19,7 +22,7 @@ export function hasRole(user, role) {
  * @returns {boolean} - true si el usuario es administrador, false de lo contrario.
  */
 export function isAdmin(user) {
-  return hasRole(user, "administrador");
+    return hasRole(user, 'administrador')
 }
 
 /**
@@ -28,5 +31,5 @@ export function isAdmin(user) {
  * @returns {boolean} - true si el usuario es un usuario estándar, false de lo contrario.
  */
 export function isUser(user) {
-  return hasRole(user, "usuario");
+    return hasRole(user, 'usuario')
 }

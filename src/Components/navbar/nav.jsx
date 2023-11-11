@@ -4,9 +4,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { formStyles } from "../../styles/Constants";
 import { isAuthenticated } from "../../services/authentication/userUtils";
 import { logout } from "../../services/authentication/authUtils";
-import { hasRole } from "../../services/authorization/roleUtils";
-const userDataString = localStorage.getItem("userData"); // Obtiene la cadena JSON de localStorage
-const userData = JSON.parse(userDataString);
+import {
+  hasRole,
+  userDataString,
+} from "../../services/authorization/roleUtils";
+const userData = JSON.parse(userDataString());
 
 const Navbar = () => {
   const token = localStorage.getItem("tokenSession");
