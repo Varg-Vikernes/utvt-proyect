@@ -2,18 +2,21 @@
 
 import React, { useState, useEffect } from "react";
 import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
-import { fetchPublications, deletePublication } from "../../../services/http/publicationRequest";
+import {
+  fetchPublications,
+  deletePublication,
+} from "../../../services/http/publicationRequest";
 import PublicationForm from "./PublicationForm";
 
 export default function BlogAdmin() {
   const [blogData, setBlogData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [initialFormData, setInitialFormData] = useState({
-    id: '',
-    title: '',
-    description: '',
-    content: '',
-    photoUrl: ''
+    id: "",
+    title: "",
+    description: "",
+    content: "",
+    photoUrl: "",
   });
   const [isEditing, setIsEditing] = useState(false);
 
@@ -31,25 +34,25 @@ export default function BlogAdmin() {
   }, []);
 
   const handleUpdate = (id) => {
-    const publicationToEdit = blogData.find(item => item.idPublicacion === id);
+    const publicationToEdit = blogData.find(
+      (item) => item.idPublicacion === id
+    );
     const publicationWithDefaults = {
-      propiedadNecesaria: '',
+      propiedadNecesaria: "",
       ...publicationToEdit,
     };
     setInitialFormData(publicationWithDefaults);
     setIsEditing(true);
     setIsModalOpen(true);
   };
-  
-  
 
   const handleCreate = () => {
     setInitialFormData({
-      id: '',
-      title: '',
-      description: '',
-      content: '',
-      photoUrl: ''
+      id: "",
+      title: "",
+      description: "",
+      content: "",
+      photoUrl: "",
     });
     setIsEditing(false);
     setIsModalOpen(true);
@@ -60,13 +63,15 @@ export default function BlogAdmin() {
     try {
       const response = await deletePublication(id);
       console.log("Respuesta del servidor:", response); // Agrega esta línea
-      const updatedBlogData = blogData.filter(item => item.idPublicacion !== id);
+      const updatedBlogData = blogData.filter(
+        (item) => item.idPublicacion !== id
+      );
       setBlogData(updatedBlogData);
     } catch (error) {
       console.error("Error al eliminar publicación:", error);
     }
   };
-  
+
   return (
     <div className="container mx-auto mt-8 bg-gray-900 rounded-lg text-gray-500 dark:text-gray-400">
       <h1 className="text-4xl font-bold mb-8 bg-gray-700 rounded-lg flex justify-between items-center">
