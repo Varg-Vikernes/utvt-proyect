@@ -37,3 +37,37 @@ export const usuariosRequest = async (userId, token) => {
         throw error
     }
 }
+
+export const updateUsuarioRequest = async (userId, token, newData) => {
+    try {
+      if (!token) {
+        throw new Error('Token de autorización no disponible.');
+      }
+  
+      const response = await fetch(
+        `https://backend-proyecto-api-production.up.railway.app/usuarios/${userId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(newData),
+        }
+      );
+  
+      if (!response.ok) {
+        throw new Error(`Solicitud de actualización de usuario fallida con código de estado: ${response.status}`);
+      }
+  
+      const updatedUserData = await response.json();
+  
+      // Almacena los datos del usuario actualizados de manera local
+      localStorage.setItem('userData', JSON.stringify(updatedUserData));
+  
+      return updatedUserData;
+    } catch (error) {
+      throw error;
+    }
+  };
+  

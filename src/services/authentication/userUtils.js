@@ -5,21 +5,26 @@
  * @returns {Object} - Datos del usuario o null si no se encuentran.
  */
 
-import { usuariosRequest } from "../http/usuariosRequest";
+import { usuariosRequest, updateUsuarioRequest } from '../http/usuariosRequest'
 
 export function getLocalUserData() {
-  const token = localStorage.getItem("tokenSession");
-  const id = localStorage.getItem("id");
-  usuariosRequest(id, token);
+    const token = localStorage.getItem('tokenSession')
+    const id = localStorage.getItem('id')
+    usuariosRequest(id, token)
 }
 
+export function updateUsuarioData(newData) {
+  const token = localStorage.getItem('tokenSession');
+  const userId = localStorage.getItem('id');
+  updateUsuarioRequest(token, userId, newData);
+}
 /**
  * Borra los datos del usuario almacenados localmente.
  */
 export function clearLocalUserData() {
-  localStorage.removeItem("userData");
-  localStorage.removeItem("tokenSession");
-  localStorage.removeItem("id");
+    localStorage.removeItem('userData')
+    localStorage.removeItem('tokenSession')
+    localStorage.removeItem('id')
 }
 
 /**
@@ -27,6 +32,6 @@ export function clearLocalUserData() {
  * @returns {boolean} - true si el usuario está autenticado, false de lo contrario.
  */
 export function isAuthenticated() {
-  const token = localStorage.getItem("tokenSession");
-  return !!token;
+    const token = localStorage.getItem('tokenSession')
+    return !!token
 }
