@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 const FormularioRegistroRecetasPopUp = ({ onClose }) => {
     const [formData, setFormData] = useState({
         titulo: '',
@@ -7,75 +6,39 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
         ingredientes: '',
         elaboracion: '',
     })
-
-    const [selectedImage, setSelectedImage] = useState(null) // Agregamos el estado para la imagen
-    const token = localStorage.getItem('tokenSession')
+    const [loading, setLoading] = useState(false)
 
     const handleInputChange = (e) => {
-        const { name, value, files } = e.target
-        if (name === 'imagen' && files.length > 0) {
-            setSelectedImage(files[0])
-            setFileUploaded(false) // Reinicia el estado de carga del archivo
-        } else {
-            setFormData({
-                ...formData,
-                [name]: value,
-            })
-        }
+        const { name, value } = e.target
+        setFormData({
+            ...formData,
+            [name]: value,
+        })
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        setFileUploading(true) // Inicia la carga del archivo
-
-        // Crea un objeto FormData para enviar la imagen junto con otros datos del formulario
-        const formDataWithImage = new FormData()
-        formDataWithImage.append('titulo', formData.titulo)
-        formDataWithImage.append('descripcion', formData.descripcion)
-        formDataWithImage.append('ingredientes', formData.ingredientes)
-        formDataWithImage.append('elaboracion', formData.elaboracion)
-        formDataWithImage.append('imagen', selectedImage)
-
-        // Define la URL de tu API
-        const apiUrl = 'https://backend-proyecto-api-production.up.railway.app/recetas'
-
-        // Configura la solicitud POST
-        const requestOptions = {
+    const handleGuardarReceta = () => {
+        setLoading(true)
+        const token = localStorage.getItem('tokenSession')
+        // Realizar la solicitud POST a la API
+        fetch('https://backend-proyecto-api-production.up.railway.app/recetas', {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
             },
-            body: formDataWithImage,
-        }
-
-        console.log(formData) // Agregar esto para depurar
-        // Realiza la solicitud fetch
-        fetch(apiUrl, requestOptions)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Error al enviar la solicitud')
-                }
-                return response.json()
-            })
+            body: JSON.stringify(formData),
+        })
+            .then((response) => response.json())
             .then((data) => {
-                // La solicitud se realizó con éxito, puedes manejar la respuesta aquí
-                console.log('Respuesta de la API:', data)
-                // Luego, cierra el modal llamando a la función onClose
+                console.log('Receta guardada con éxito:', data)
+                setLoading(false)
                 onClose()
-
-                setFileUploading(false) // La carga del archivo ha finalizado
-                setFileUploaded(true) // El archivo ha sido cargado por completo
             })
             .catch((error) => {
-                // Ocurrió un error al enviar la solicitud, puedes manejar el error aquí
-                console.error('Error al enviar la solicitud:', error)
+                console.error('Error al guardar la receta:', error)
+                setLoading(false)
             })
     }
-
-    /* Se agregaron 2 nuevos estados para rastrear si la carga del archivo esta en curso o ya a finalizado */
-    const [fileUploading, setFileUploading] = useState(false)
-    const [fileUploaded, setFileUploaded] = useState(false)
 
     return (
         <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -116,7 +79,7 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                             <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                                 Agregar nueva receta
                             </h2>
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={handleGuardarReceta}>
                                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                                     <div class="w-full">
                                         <label
@@ -194,63 +157,15 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                                             Paso 3: 
                                             Agrega los que sean necesarios :)"></textarea>
                                     </div>
-
-                                    {/* Aqui se incluye el campo para la carga de archivos. */}
-                                    <div class="flex items-center justify-center w-full sm:col-span-2">
-                                        <label
-                                            htmlFor="imagen"
-                                            class="flex flex-col items-center justify-center w-full h-22 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                <svg
-                                                    class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                    aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 20 16">
-                                                    <path
-                                                        stroke="currentColor"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                                                    />
-                                                </svg>
-                                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                                    <span class="font-semibold">
-                                                        Click to upload
-                                                    </span>{' '}
-                                                    or drag and drop
-                                                </p>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">
-                                                    SVG, PNG, JPG or GIF (MAX. 800x400px)
-                                                </p>
-                                            </div>
-                                            <input
-                                                onChange={handleInputChange}
-                                                name="imagen"
-                                                id="imagen"
-                                                type="file"
-                                                class="hidden"
-                                            />
-                                        </label>
-                                    </div>
                                 </div>
-                                {fileUploading && (
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                                        Cargando archivo...
-                                    </p>
-                                )}
-
-                                {fileUploaded && (
-                                    <p className="text-sm text-green-500 dark:text-green-400">
-                                        Archivo cargado con éxito.
-                                    </p>
-                                )}
 
                                 <button
                                     type="submit"
+                                    onClick={handleGuardarReceta}
+                                    disabled={loading}
                                     class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-green-600 hover:bg-green-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                                    Agregar Receta
+                                    {loading ? 'Guardando...' : 'Guardar Receta'}
+                                    Guardar Receta
                                 </button>
                             </form>
                         </div>
