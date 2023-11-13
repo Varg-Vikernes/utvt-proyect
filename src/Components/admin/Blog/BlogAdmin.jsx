@@ -19,6 +19,14 @@ export default function BlogAdmin() {
     photoUrl: "",
   });
   const [isEditing, setIsEditing] = useState(false);
+  const [actionData, setActionData] = useState({
+    action: "",
+    id: null,
+  });
+  const [confirmation, setConfirmation] = useState({
+    show: false,
+    message: "",
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,14 +39,33 @@ export default function BlogAdmin() {
     };
 
     fetchData();
-  }, []);
+  }, [confirmation.show]); // Actualiza cuando cambia el estado de confirmación
 
-  const handleUpdate = (id) => {
+  const handleActionClick = (action, id, confirmText, confirmationMessage) => {
+    setActionData({ action, id });
+    setConfirmation({
+      show: true,
+      message: confirmationMessage,
+
+      confirmText,
+    });
+
+    if (action === "edit") {
+      setConfirmation(false);
+      handleEdit(id);
+    } else if (action === "delete") {
+      // No es necesario abrir el modal aquí
+    } else if (action === "create") {
+      setConfirmation(false);
+      handleCreate();
+    }
+  };
+
+  const handleEdit = (id) => {
     const publicationToEdit = blogData.find(
       (item) => item.idPublicacion === id
     );
     const publicationWithDefaults = {
-      propiedadNecesaria: "",
       ...publicationToEdit,
     };
     setInitialFormData(publicationWithDefaults);
@@ -47,21 +74,26 @@ export default function BlogAdmin() {
   };
 
   const handleCreate = () => {
+    setIsEditing(false);
+    setIsModalOpen(true);
     setInitialFormData({
       id: "",
       title: "",
       description: "",
       content: "",
+      photoUrl: "",
     });
-    setIsEditing(false);
-    setIsModalOpen(true);
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async () => {
+    setConfirmation({ ...confirmation, show: false });
+    const id = actionData.id;
+
     console.log(`Eliminar publicación con ID: ${id}`);
     try {
       const response = await deletePublication(id);
-      console.log("Respuesta del servidor:", response); // Agrega esta línea
+      console.log("Respuesta del servidor:", response);
+
       const updatedBlogData = blogData.filter(
         (item) => item.idPublicacion !== id
       );
@@ -71,16 +103,33 @@ export default function BlogAdmin() {
     }
   };
 
+  const handleCancel = () => {
+    setActionData({ action: "", id: null });
+    setConfirmation({ ...confirmation, show: false });
+  };
+
+  const handleConfirm = () => {
+    const { action } = actionData;
+
+    if (action === "delete") {
+      handleDelete();
+    }
+
+    // Puedes agregar lógica para otros tipos de acciones si es necesario
+
+    setActionData({ action: "", id: null });
+    setConfirmation({ ...confirmation, show: false });
+  };
+
   return (
     <div className="container mx-auto mt-8 bg-gray-900 rounded-lg text-gray-500 dark:text-gray-400">
       <h1 className="text-4xl font-bold mb-8 bg-gray-700 rounded-lg flex justify-between items-center">
         Publicaciones
         <button
-          onClick={handleCreate}
+          onClick={() => handleActionClick("create")}
           className="w-1/2 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto"
         >
-          Agregar
-          <FaPlus />
+          Create
         </button>
       </h1>
 
@@ -120,17 +169,55 @@ export default function BlogAdmin() {
             </div>
             <div className="col-span-1 text-center">
               <button
-                onClick={() => handleUpdate(item.idPublicacion)}
-                className="mr-2 bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600"
-              >
-                <FaEdit />
-              </button>
-              <button
-                onClick={() => handleDelete(item.idPublicacion)}
-                className="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600"
+                onClick={() =>
+                  handleActionClick(
+                    "delete",
+                    item.idPublicacion,
+                    "Eliminar",
+                    "Esta publicación se eliminará permanentemente. ¿Estás seguro?",
+                    "red-500",
+                    "green-500"
+                  )
+                }
+                className="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600 mr-2"
               >
                 <FaTrash />
               </button>
+
+              <button
+                onClick={() => handleActionClick("edit", item.idPublicacion)}
+                className="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600 mr-2"
+              >
+                <FaEdit />
+              </button>
+
+              {/* Notificación de confirmación */}
+              {confirmation.show && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center">
+                  <div
+                    className={`bg-gray-700 text-white p-4 rounded shadow-md`}
+                  >
+                    <p>
+                      {confirmation.message ||
+                        "¿Estás seguro de que quieres eliminar esto?"}
+                    </p>
+                    <div className="mt-4 flex justify-end">
+                      <button
+                        onClick={handleConfirm}
+                        className={`bg-green-600 text-white py-1 px-2 rounded hover:bg-green-700 mr-2`}
+                      >
+                        Confirmar
+                      </button>
+                      <button
+                        onClick={handleCancel}
+                        className={`bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600`}
+                      >
+                        Cancelar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </React.Fragment>
         ))}
