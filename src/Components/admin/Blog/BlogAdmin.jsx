@@ -120,6 +120,20 @@ export default function BlogAdmin() {
     setActionData({ action: "", id: null });
     setConfirmation({ ...confirmation, show: false });
   };
+  const truncateText = (text, maxLength = 80) => {
+    if (text == null) {
+      return ""; // O podrías devolver un valor predeterminado o null según tu necesidad
+    }
+  
+    const trimmedText = text.trim();
+  
+    if (trimmedText.length <= maxLength) {
+      return trimmedText;
+    } else {
+      return `${trimmedText.slice(0, maxLength)}...`;
+    }
+  };
+  
 
   return (
     <div className="container mx-auto mt-8 bg-gray-900 rounded-lg text-gray-500 dark:text-gray-400">
@@ -156,9 +170,16 @@ export default function BlogAdmin() {
         {blogData.map((item) => (
           <React.Fragment key={item.idPublicacion}>
             <div className="col-span-1 text-center">{item.idPublicacion}</div>
-            <div className="col-span-1 text-center">{item.titulo}</div>
-            <div className="col-span-1 text-center">{item.descripcion}</div>
-            <div className="col-span-1 text-center">{item.contenido}</div>
+            <div className="col-span-1 text-center">
+              {truncateText(item.titulo)}
+            </div>
+            <div className="col-span-1 text-center">
+              {truncateText(item.descripcion)}
+            </div>
+            <div className="col-span-1 text-center">
+              {truncateText(item.contenido)}
+            </div>
+
             <div className="col-span-1 ">
               {" "}
               <img
