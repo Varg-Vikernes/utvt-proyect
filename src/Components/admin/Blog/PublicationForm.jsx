@@ -94,15 +94,11 @@ const PublicationForm = ({
       if (imageFile) {
         croppedImage = await handleImageOperations(imageFile);
       }
-
       if (isEditing) {
         if (!imageFile) {
           const response = await updatePublication(idPublicacion, formData);
         } else {
-          console.log("tu ya sabras");
-
           const response = await updatePublication(idPublicacion, formData);
-
           if (response.length) {
             await handleImageUpload(croppedImage);
           } else {

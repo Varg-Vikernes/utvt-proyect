@@ -13,9 +13,9 @@ export default function BlogAdmin() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [initialFormData, setInitialFormData] = useState({
     id: "",
-    title: "",
-    description: "",
-    content: "",
+    titulo: "",
+    descripcion: "",
+    contenido: "",
     photoUrl: "",
   });
   const [isEditing, setIsEditing] = useState(false);
@@ -78,9 +78,9 @@ export default function BlogAdmin() {
     setIsModalOpen(true);
     setInitialFormData({
       id: "",
-      title: "",
-      description: "",
-      content: "",
+      titulo: "",
+      descripcion: "",
+      contenido: "",
       photoUrl: "",
     });
   };

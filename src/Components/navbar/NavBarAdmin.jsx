@@ -1,7 +1,8 @@
 import React from "react";
-import { logout } from "../../services/authentication/authUtils";
+import { checkLogout, logout } from "../../services/authentication/authUtils";
 
 const NavBarAdmin = () => {
+  checkLogout();
   return (
     <nav className="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 h-20">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
