@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-const FormularioRegistroRecetasPopUp = ({ onClose }) => {
+const FormularioRegistroRecetasPopUp = ({ onClose, actualizarRecetas }) => {
     const [formData, setFormData] = useState({
         titulo: '',
         descripcion: '',
@@ -33,6 +33,8 @@ const FormularioRegistroRecetasPopUp = ({ onClose }) => {
                 console.log('Receta guardada con éxito:', data)
                 setLoading(false)
                 onClose()
+                // Actualizar las recetas en Recetas
+                actualizarRecetas(data)
             })
             .catch((error) => {
                 console.error('Error al guardar la receta:', error)
