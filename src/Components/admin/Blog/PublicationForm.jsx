@@ -63,9 +63,10 @@ const PublicationForm = ({
     return cropImageTo16x9(convertedImage);
   };
 
-  const handleImageUpload = async (croppedImage) => {
+  const handleImageUpload = async (croppedImage, idActul) => {
     try {
-      const publicationId = isEditing ? formData.idPublicacion : null;
+      console.log(formData.idPublicacion, formData);
+      const publicationId = isEditing ? formData.idPublicacion : idActul;
       return await uploadImage(
         "publicacion",
         `publicacion${publicationId}`,
@@ -112,8 +113,9 @@ const PublicationForm = ({
       } else {
         const response = await createPublication(formData);
 
-        if (response.length && imageUrl !== null) {
-          imageUrl = await handleImageUpload(croppedImage);
+        if (response) {
+          const id = response.idPublicacion;
+          imageUrl = await handleImageUpload(croppedImage, id);
         } else {
           console.error("Error al crear la publicación");
           return;
