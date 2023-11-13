@@ -1,5 +1,4 @@
-// PublicationForm.js
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   createPublication,
@@ -9,6 +8,7 @@ import { uploadImage } from "../../../services/http/GcpRequest";
 import { convertImage, cropImageTo16x9 } from "./ImageUtils";
 import PublicationFormEdit from "./PublicationFormEdit";
 import PublicationFormCreate from "./PublicationFormCreate";
+
 const PublicationForm = ({
   isModalOpen,
   setIsModalOpen,
@@ -16,40 +16,35 @@ const PublicationForm = ({
   fetchBlogData,
   isEditing,
 }) => {
-  const [formData, setFormData] = React.useState({ ...initialFormData });
-  const [errors, setErrors] = React.useState({});
-  const [imageFile, setImageFile] = React.useState(null);
+  const [formData, setFormData] = useState({ ...initialFormData });
+  const [errors, setErrors] = useState({});
+  const [imageFile, setImageFile] = useState(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setFormData({ ...initialFormData });
     setErrors({});
   }, [isModalOpen, initialFormData]);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImageFile(file);
+    }));
   };
 
   const validateForm = () => {
     const newErrors = {};
 
     // Agrega aquí tus reglas de validación
-    if (!formData.titulo.trim()) {
+    if (!formData || !formData.titulo.trim()) {
       newErrors.titulo = "El título es obligatorio";
     }
 
-    if (!formData.descripcion.trim()) {
+    if (!formData || !formData.descripcion.trim()) {
       newErrors.descripcion = "La descripción es obligatoria";
     }
 
-    if (!formData.contenido.trim()) {
+    if (!formData || !formData.contenido || !formData.contenido.trim()) {
       newErrors.contenido = "El contenido es obligatorio";
     }
 
@@ -63,8 +58,14 @@ const PublicationForm = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const uploadPublicationImage = async (croppedImage, publicationId) => {
+  const handleImageOperations = async (imageFile) => {
+    const convertedImage = await convertImage(imageFile);
+    return cropImageTo16x9(convertedImage);
+  };
+
+  const handleImageUpload = async (croppedImage) => {
     try {
+      const publicationId = isEditing ? formData.idPublicacion : null;
       return await uploadImage(
         "publicacion",
         `publicacion${publicationId}`,
@@ -72,18 +73,7 @@ const PublicationForm = ({
         croppedImage
       );
     } catch (error) {
-      console.error("Error al subir la imagen:", error);
-      throw error;
-    }
-  };
-
-  const handleImageUpload = async (croppedImage) => {
-    try {
-      const publicationId = isEditing ? formData.idPublicacion : null;
-      return await uploadPublicationImage(croppedImage, publicationId);
-    } catch (error) {
       console.error("Error al manejar la imagen:", error);
-      // Manejar el error de manera específica según tus necesidades.
       throw error;
     }
   };
@@ -96,39 +86,33 @@ const PublicationForm = ({
     }
 
     try {
-      let imageUrl = formData.fotoUrl;
+      const { idPublicacion, fotoUrl } = formData;
+      let imageUrl = fotoUrl;
+      let croppedImage = null;
 
-      // Subir la imagen si hay un nuevo archivo seleccionado
       if (imageFile) {
-        // Convertir y recortar la imagen según los requisitos
-        const convertedImage = await convertImage(imageFile);
-        const croppedImage = await cropImageTo16x9(convertedImage);
-
-        //imageUrl = await handleImageUpload(croppedImage);
-
-        // Solo continuar si la carga de la imagen fue exitosa
-        if (imageUrl === null) {
-          console.error("Error al cargar la imagen");
-          return;
-        }
+        croppedImage = await handleImageOperations(imageFile);
       }
 
-      console.log(formData);
-
       if (isEditing) {
-        await updatePublication(formData.idPublicacion, formData);
-        // Verifica si la respuesta tiene un id
-        if (response.idPublicacion) {
-          await handleImageUpload(croppedImage);
+        if (!imageFile) {
+          const response = await updatePublication(idPublicacion, formData);
         } else {
-          console.error("Error al crear la publicación");
-          return;
+          console.log("tu ya sabras");
+
+          const response = await updatePublication(idPublicacion, formData);
+
+          if (response.length) {
+            await handleImageUpload(croppedImage);
+          } else {
+            console.error("Error al actualizar la publicación");
+            return;
+          }
         }
       } else {
         const response = await createPublication(formData);
 
-        // Verifica si la respuesta tiene un id y la fotoUrl no es null antes de llamar a handleImageUpload
-        if (response.idPublicacion && imageUrl !== null) {
+        if (response.length && imageUrl !== null) {
           imageUrl = await handleImageUpload(croppedImage);
         } else {
           console.error("Error al crear la publicación");
@@ -143,6 +127,11 @@ const PublicationForm = ({
     }
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImageFile(file);
+  };
+
   const resetForm = () => {
     setFormData(initialFormData);
     setImageFile(null);
@@ -153,7 +142,6 @@ const PublicationForm = ({
     return null;
   }
 
-  // Renderizar el formulario de edición o creación según la condición isEditing
   return isEditing ? (
     <PublicationFormEdit
       formData={formData}
@@ -175,6 +163,14 @@ const PublicationForm = ({
       resetForm={resetForm}
     />
   );
+};
+
+PublicationForm.propTypes = {
+  isModalOpen: PropTypes.bool.isRequired,
+  setIsModalOpen: PropTypes.func.isRequired,
+  initialFormData: PropTypes.object.isRequired,
+  fetchBlogData: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool.isRequired,
 };
 
 export default PublicationForm;

@@ -52,7 +52,6 @@ export default function BlogAdmin() {
       title: "",
       description: "",
       content: "",
-      photoUrl: "",
     });
     setIsEditing(false);
     setIsModalOpen(true);
@@ -90,7 +89,6 @@ export default function BlogAdmin() {
         setIsModalOpen={setIsModalOpen}
         initialFormData={initialFormData}
         fetchBlogData={() => {
-          fetchData();
           setIsModalOpen(false);
         }}
         isEditing={isEditing}

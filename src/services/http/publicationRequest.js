@@ -1,6 +1,6 @@
 // src/services/publicationRequest.js
 
-const token = localStorage.getItem("tokenSession");
+const token = localStorage.getItem('tokenSession')
 const API_BASE_URL = 'http://backend-proyecto-api-production.up.railway.app/publicacion'
 
 export const fetchPublications = async () => {
@@ -33,7 +33,7 @@ export const createPublication = async (publicationData) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify(publicationData),
         })
@@ -57,7 +57,7 @@ export const updatePublication = async (id, publicationData) => {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify(publicationData),
         })
@@ -76,7 +76,6 @@ export const updatePublication = async (id, publicationData) => {
 }
 
 export const deletePublication = async (id) => {
-
     try {
         if (!token) {
             throw new Error('Token de autorización no disponible.')
