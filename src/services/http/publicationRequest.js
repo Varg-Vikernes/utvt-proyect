@@ -2,30 +2,32 @@
 
 const token = localStorage.getItem('tokenSession')
 const API_BASE_URL = 'http://backend-proyecto-api-production.up.railway.app/publicacion'
-
 export const fetchPublications = async () => {
     try {
-        const response = await fetch(API_BASE_URL, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-
-        if (!response.ok) {
-            throw new Error(
-                `Solicitud de publicaciones fallida con código de estado: ${response.status}`
-            )
+      const response = await fetch(API_BASE_URL, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // Agregar el encabezado necesario para permitir solicitudes desde http://localhost:3000
+          'Origin': 'http://localhost:3000',
         }
-
-        const publicationData = await response.json()
-        localStorage.setItem('publicationData', JSON.stringify(publicationData))
-
-        return publicationData
+      });
+  
+      if (!response.ok) {
+        throw new Error(
+          `Solicitud de publicaciones fallida con código de estado: ${response.status}`
+        );
+      }
+  
+      const publicationData = await response.json();
+      localStorage.setItem('publicationData', JSON.stringify(publicationData));
+  
+      return publicationData;
     } catch (error) {
-        throw error
+      throw error;
     }
-}
+  };
+  
 
 export const createPublication = async (publicationData) => {
     try {
