@@ -65,7 +65,6 @@ const PublicationForm = ({
 
   const handleImageUpload = async (croppedImage, idActul) => {
     try {
-      console.log(formData.idPublicacion, formData);
       const publicationId = isEditing ? formData.idPublicacion : idActul;
       return await uploadImage(
         "publicacion",

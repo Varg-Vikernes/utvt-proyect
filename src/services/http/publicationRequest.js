@@ -2,36 +2,39 @@
 
 const token = localStorage.getItem('tokenSession')
 const API_BASE_URL = 'http://backend-proyecto-api-production.up.railway.app/publicacion'
+
 export const fetchPublications = async () => {
     try {
-      const response = await fetch(API_BASE_URL, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          // Agregar el encabezado necesario para permitir solicitudes desde http://localhost:3000
-          'Origin': 'http://localhost:3000',
+        const response = await fetch(
+            `https://backend-proyecto-api-production.up.railway.app/publicacion`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
+
+        if (!response.ok) {
+            throw new Error(
+                `Solicitud de publicaciones fallida con código de estado: ${response.status}`
+            )
         }
-      });
-  
-      if (!response.ok) {
-        throw new Error(
-          `Solicitud de publicaciones fallida con código de estado: ${response.status}`
-        );
-      }
-  
-      const publicationData = await response.json();
-      localStorage.setItem('publicationData', JSON.stringify(publicationData));
-  
-      return publicationData;
+
+        const publicationData = await response.json()
+        localStorage.setItem('publicationData', JSON.stringify(publicationData))
+
+        return publicationData
     } catch (error) {
-      throw error;
+        throw error
     }
-  };
-  
+}
 
 export const createPublication = async (publicationData) => {
     try {
-        const response = await fetch(API_BASE_URL, {
+        const response = await fetch(
+            `https://backend-proyecto-api-production.up.railway.app/publicacion`,
+            {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,7 +58,7 @@ export const createPublication = async (publicationData) => {
 
 export const updatePublication = async (id, publicationData) => {
     try {
-        const response = await fetch(`${API_BASE_URL}/${id}`, {
+        const response = await fetch(`https://backend-proyecto-api-production.up.railway.app/publicacion/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -83,7 +86,7 @@ export const deletePublication = async (id) => {
             throw new Error('Token de autorización no disponible.')
         }
 
-        const response = await fetch(`${API_BASE_URL}/${id}`, {
+        const response = await fetch(`https://backend-proyecto-api-production.up.railway.app/publicacion/${id}`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${token}`,
