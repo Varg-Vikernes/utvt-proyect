@@ -16,9 +16,9 @@ function AdminHome() {
   return (
     <div>
       <NavBarAdmin />
-      <div className="flex bg-gray-800">
+      <div className="flex bg-gradient-to-r from-cyan-500 to-blue-500">
         <SideBarComponent handleOptionSelect={handleOptionSelect} />
-        <div className="flex-1 ml-64 p-8 bg-slate-300">
+        <div className="flex-1 ml-64 p-8 dark:bg-gray-950 ">
           {selectedOption === "recetas" && <Recetas />}
           {selectedOption === "usuarios" && <Usuarios />}
           {selectedOption === "blog" && <Blog />}

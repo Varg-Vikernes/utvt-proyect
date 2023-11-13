@@ -70,11 +70,6 @@ function SideBarComponent({ handleOptionSelect }) {
               icon={<FaBlog className="w-5 h-5" />}
             />
             <SidebarItem
-              label="Sign Up"
-              onClick={() => handleLiClick("signup")}
-              icon={<FaUserPlus className="w-5 h-5" />}
-            />
-            <SidebarItem
               label="Logout"
               onClick={handleLogoutClick}
               icon={<FaSignOutAlt className="w-5 h-5 text-blue-500" />}
