@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
-  createPublication,
-  updatePublication,
-} from "../../../services/http/publicationRequest";
+  createRecipe,
+  updateRecipe,
+} from "../../../services/http/recipeRequest";
 import { uploadImage } from "../../../services/http/GcpRequest";
 import { convertImage, cropImageTo16x9 } from "./ImageUtils";
-import PublicationFormEdit from "./PublicationFormEdit";
-import PublicationFormCreate from "./PublicationFormCreate";
+import RecipeFormEdit from "./RecipeFormEdit";
+import RecipeFormCreate from "./RecipeFormCreate";
 
-const PublicationForm = ({
+const RecipeForm = ({
   isModalOpen,
   setIsModalOpen,
   initialFormData,
@@ -44,10 +44,13 @@ const PublicationForm = ({
       newErrors.descripcion = "La descripción es obligatoria";
     }
 
-    if (!formData || !formData.contenido || !formData.contenido.trim()) {
-      newErrors.contenido = "El contenido es obligatorio";
+    if (!formData || !formData.elaboracion || !formData.elaboracion.trim()) {
+      newErrors.elaboracion = "La elaboracion es obligatorio";
     }
 
+    if (!formData || !formData.ingredientes || !formData.ingredientes.trim()) {
+      newErrors.ingredientes = "Los ingredientes es obligatorio";
+    }
     if (!imageFile && !formData.fotoUrl) {
       newErrors.fotoUrl = "Debe cargar una imagen";
     }
@@ -65,11 +68,11 @@ const PublicationForm = ({
 
   const handleImageUpload = async (croppedImage, idActul) => {
     try {
-      const publicationId = isEditing ? formData.idPublicacion : idActul;
+      const recipeId = isEditing ? formData.idReceta : idActul;
       return await uploadImage(
-        "publicacion",
-        `publicacion${publicationId}`,
-        publicationId,
+        "receta",
+        `receta${recipeId}`,
+        recipeId,
         croppedImage
       );
     } catch (error) {
@@ -86,7 +89,7 @@ const PublicationForm = ({
     }
 
     try {
-      const { idPublicacion, fotoUrl } = formData;
+      const { idReceta, fotoUrl } = formData;
       let imageUrl = fotoUrl;
       let croppedImage = null;
 
@@ -95,24 +98,25 @@ const PublicationForm = ({
       }
       if (isEditing) {
         if (!imageFile) {
-          const response = await updatePublication(idPublicacion, formData);
+          const response = await updateRecipe(idReceta, formData);
         } else {
-          const response = await updatePublication(idPublicacion, formData);
+          const response = await updateRecipe(idReceta, formData);
+          console.log(response);
           if (response.length) {
             await handleImageUpload(croppedImage);
           } else {
-            console.error("Error al actualizar la publicación");
+            console.error("Error al actualizar la receta");
             return;
           }
         }
       } else {
-        const response = await createPublication(formData);
-        console.log(response);
+        const response = await createRecipe(formData);
+
         if (response) {
-          const id = response.idPublicacion;
+          const id = response.idReceta;
           imageUrl = await handleImageUpload(croppedImage, id);
         } else {
-          console.error("Error al crear la publicación");
+          console.error("Error al crear la receta");
           return;
         }
       }
@@ -120,7 +124,7 @@ const PublicationForm = ({
       fetchBlogData();
       resetForm();
     } catch (error) {
-      console.error("Error al guardar publicación:", error);
+      console.error("Error al guardar receta:", error);
     }
   };
 
@@ -140,7 +144,7 @@ const PublicationForm = ({
   }
 
   return isEditing ? (
-    <PublicationFormEdit
+    <RecipeFormEdit
       formData={formData}
       errors={errors}
       handleChange={handleChange}
@@ -150,7 +154,7 @@ const PublicationForm = ({
       resetForm={resetForm}
     />
   ) : (
-    <PublicationFormCreate
+    <RecipeFormCreate
       formData={formData}
       errors={errors}
       handleChange={handleChange}
@@ -162,7 +166,7 @@ const PublicationForm = ({
   );
 };
 
-PublicationForm.propTypes = {
+RecipeForm.propTypes = {
   isModalOpen: PropTypes.bool.isRequired,
   setIsModalOpen: PropTypes.func.isRequired,
   initialFormData: PropTypes.object.isRequired,
@@ -170,4 +174,4 @@ PublicationForm.propTypes = {
   isEditing: PropTypes.bool.isRequired,
 };
 
-export default PublicationForm;
+export default RecipeForm;

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { getLocalData } from "../../../services/authentication/localStorageUtils";
-import { recipeGet } from "../../../services/http/recipeRequest";
+import { fetchRecipe } from "../../../services/http/recipeRequest";
 import RecipeCard from "./RecipeCards";
 import RecipeDetails from "./RecipeDetails";
 import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
 
-recipeGet();
+fetchRecipe();
 class RecipeList extends Component {
   constructor() {
     super();
