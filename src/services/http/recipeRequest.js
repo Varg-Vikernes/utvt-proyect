@@ -16,9 +16,7 @@ export const fetchRecipe = async () => {
         )
 
         if (!response.ok) {
-            throw new Error(
-                `Solicitud de recetas fallida con código de estado: ${response.status}`
-            )
+            throw new Error(`Solicitud de recetas fallida con código de estado: ${response.status}`)
         }
 
         const RecipeData = await response.json()
@@ -70,7 +68,7 @@ export const updateRecipe = async (id, RecipeData) => {
                 body: JSON.stringify(RecipeData),
             }
         )
-
+        
         if (!response.ok) {
             throw new Error(
                 `Solicitud para actualizar una publicación fallida con código de estado: ${response.status}`

@@ -2,7 +2,7 @@ import React from "react";
 import { FaRegWindowClose } from "react-icons/fa";
 
 const RecipeDetails = ({ recipe, onCloseDetails }) => {
-  const imgSrc = recipe.imagen || "assets/home/image/Imagen_no_encontrada.jpg";
+  const imgSrc = recipe.fotoUrl || "assets/home/image/Imagen_no_encontrada.jpg";
 
   const formatIngredientsAndSteps = (text) => {
     const items = text.split(";");

@@ -8,7 +8,7 @@ const RecipeCard = ({ recipe, onOpenDetails }) => {
   return (
     <div className="bg-gray-200 p-4 shadow-lg rounded-lg">
       <img
-        src={recipe.imagen || "assets/home/image/Imagen_no_encontrada.jpg"}
+        src={recipe.fotoUrl || "assets/home/image/Imagen_no_encontrada.jpg"}
         alt={recipe.titulo}
         className="w-full h-36 object-cover mb-2"
       />
