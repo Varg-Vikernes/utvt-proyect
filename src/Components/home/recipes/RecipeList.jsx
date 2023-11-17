@@ -6,8 +6,6 @@ import RecipeDetails from "./RecipeDetails";
 import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
 
 fetchRecipe();
-console.log("recipes, blog",fetchRecipe());
-console.log("informaccion local ", getLocalData("RecipeData"));
 class RecipeList extends Component {
   constructor() {
     super();

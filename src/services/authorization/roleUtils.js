@@ -7,11 +7,14 @@
  * @returns {boolean} - true si el usuario tiene el rol especificado, false de lo contrario.
  */
 export function hasRole(user, role) {
+    console.log(user.rol, user);
+    console.log("prueba", user && user.rol);
     if (user && user.rol) {
         return user.rol === role
     }
     return false
 }
+
 export function userDataString() {
     return localStorage.getItem('userData')
 }

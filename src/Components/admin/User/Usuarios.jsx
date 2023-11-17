@@ -109,7 +109,7 @@ const UserProfilePage = () => {
         </label>
         <p className={rolChanged ? "text-red-500" : ""}>{usuario.rol || ""}</p>
       </div>
-      <div className="flex justify-between">
+      {/* <div className="flex justify-between">
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
           onClick={handleUpdateUser}
@@ -130,7 +130,7 @@ const UserProfilePage = () => {
           <FaUserEdit className="mr-2" />
           Cambiar
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

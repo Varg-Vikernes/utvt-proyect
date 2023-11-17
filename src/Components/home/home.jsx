@@ -1,49 +1,14 @@
 import React from "react";
 
-const Home = ({ imageUrl, imageUrl2 }) => {
-  const containerStyle = {
-    display: "flex",
-    alignItems: "center",
-    width: "100%",
-  };
-
-  const textStyle = {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    padding: "20px",
-    backgroundColor: "white",
-    textAlign: "center",
-    height: "300px"
-  };
-
-
-  const imageStyle = {
-    flex: 1,
-    width: "500px", // Ajusta el ancho de la imagen a 400px
-    display: "flex",
-    justifyContent: "center", // Centra la imagen horizontalmente
-  };
-  const imageStyleBarra = {
-    flex: 1,
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column", // Cambia la dirección a "column" para mostrar la imagen debajo
-  };
-
-
-
-
+const Home = () => {
   return (
     <div className="text-center" id="bienvenida">
-      <div style={containerStyle}>
-        <div style={textStyle}>
-          <h1 className="text-4xl font-bold" style={{ color: "black" }}>
+      <div className="flex items-center w-full">
+        <div className="flex-1 flex flex-col justify-center p-20 bg-white text-center h-300">
+          <h1 className="text-4xl font-bold text-black">
             ¡Bienvenido a nuestra aplicación!
           </h1>
-          <h3 className="text-xl mt-4" style={{ color: "black" }}>
+          <h3 className="text-xl mt-4 text-black">
             Descubre lo que podemos ofrecerte.
           </h3>
           <div className="mt-4 space-x-4">
@@ -61,13 +26,12 @@ const Home = ({ imageUrl, imageUrl2 }) => {
             </a>
           </div>
         </div>
-        <div className="w-80 h-80 p-4" style={imageStyle}>
+        <div className="w-80 h-80 p-4 flex justify-center">
           <img src="/assets/home/image/QV - Inicio.png" alt="" />
         </div>
       </div>
-      <div style={imageStyleBarra}>
+      <div className="flex-1 w-full flex items-center flex-col">
         <img src="/assets/home/image/barra-sf.png" alt="" />
-
       </div>
     </div>
   );
