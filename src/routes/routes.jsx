@@ -15,7 +15,7 @@ import Home from "../page/Home/Overview";
 import Error404 from "../page/Error/Error404";
 import ErrorBoundary from "../page/Error/ErrorBoundary";
 import { isAuthenticated } from "../services/authentication/userUtils"; // Importa la función de autenticación
-import { hasRole } from "../services/authorization/roleUtils";
+import { checkUserRole } from "../services/authorization/roleUtils";
 import AdminHome from "../page/Dashboard/AdminHome";
 // import PrivateRoute from "../services/authorization/PrivateRoute"; // Importa el componente PrivateRoute
 
@@ -49,7 +49,9 @@ const routerConfig = [
       <PrivateRoute
         element={<AdminHome />}
         authCheck={() =>
-          isAuthenticated() && hasRole(userData, "administrador")
+          isAuthenticated() && userData
+            ? checkUserRole(userData, "administrador")
+            : false
         }
         fallbackPath="/login"
       />

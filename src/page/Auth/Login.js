@@ -15,27 +15,24 @@ const Login = () => {
 
     async function handleLogin(email, password) {
         try {
-            setIsLoading(true) // Activa el spinner
-            setError(null) // Limpia los errores
+            setIsLoading(true)
+            setError(null)
 
-            // Realiza la solicitud de inicio de sesión al servidor
             const loginResult = await loginRequest(email, password)
 
             if (loginResult) {
-                // El inicio de sesión fue exitoso, redirige al usuario a la página de inicio.
-                getLocalUserData()
+                await getLocalUserData() // Espera a que se resuelva la promesa
+                console.log('navbar ', localStorage.getItem('userData'))
                 navigate('/')
             } else {
-                // El inicio de sesión falló; muestra un mensaje de error.
                 setError('Inicio de sesión fallido. Verifique sus credenciales.')
                 clearLocalUserData()
             }
         } catch (error) {
-            // Error de red u otro error inesperado.
             setError('Ocurrió un error durante el inicio de sesión. Por favor, intente nuevamente.')
             clearLocalUserData()
         } finally {
-            setIsLoading(false) // Desactiva el spinner
+            setIsLoading(false)
         }
     }
 

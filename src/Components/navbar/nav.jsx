@@ -4,28 +4,29 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { formStyles } from "../../styles/Constants";
 import { isAuthenticated } from "../../services/authentication/userUtils";
 import { logout, checkLogout } from "../../services/authentication/authUtils";
-import {
-  hasRole,
-  userDataString,
-} from "../../services/authorization/roleUtils";
-const userData = JSON.parse(userDataString());
+import { checkUserRole } from "../../services/authorization/roleUtils";
 
 // Llamar a la función para verificar el logout
 checkLogout();
 
 const Navbar = () => {
-  const token = localStorage.getItem("tokenSession");
-  const nombre = localStorage.getItem("nombre");
-
   const navigate = useNavigate();
-  const location = useLocation();
-  const currentPath = location.hash;
+
+  const userData = JSON.parse(localStorage.getItem("userData"));
 
   const userIsLoggedIn = isAuthenticated();
+
+  const location = useLocation();
+  const currentPath = location.hash;
   const isLoginPage = location.pathname === "/login";
   const isRegisterPage = location.pathname === "/register";
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const role = "administrador";
+
+  const hasUserRole = userData ? checkUserRole(userData, role) : false;
+  //console.log(hasUserRole);
 
   const toggleDropdown = () => {
     if (window.innerWidth <= 767) {
@@ -108,7 +109,7 @@ const Navbar = () => {
           {userIsLoggedIn ? (
             // Mostrar el botón de Cerrar Sesión si el usuario está autenticado
             <div className="flex items-center space-x-2">
-              {hasRole(userData, "administrador") && (
+              {hasUserRole && (
                 <TransparentButton onClick={() => navigate("/admin")}>
                   Administrar
                 </TransparentButton>

@@ -15,7 +15,7 @@ function Dashboard() {
             <Navbar />
             <Home />
             <ComeAbout />
-            <VideoProduct />
+            <VideoProduct src="assets/home/videos/q-spicy.mp4" />
             <RecipeList />
             <MapLocation />
             <Blog />

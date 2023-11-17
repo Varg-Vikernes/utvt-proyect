@@ -6,14 +6,13 @@
  * @param {Object} user - Los datos del usuario.
  * @returns {boolean} - true si el usuario tiene el rol especificado, false de lo contrario.
  */
-export function hasRole(user, role) {
-    console.log(user.rol, user);
-    console.log("prueba", user && user.rol);
+export function checkUserRole(user, roleToCheck) {
     if (user && user.rol) {
-        return user.rol === role
+      return user.rol === roleToCheck;
     }
-    return false
-}
+
+    return false;
+  }
 
 export function userDataString() {
     return localStorage.getItem('userData')

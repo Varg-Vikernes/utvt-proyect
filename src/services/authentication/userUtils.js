@@ -10,13 +10,13 @@ import { usuariosRequest, updateUsuarioRequest } from '../http/usuariosRequest'
 export function getLocalUserData() {
     const token = localStorage.getItem('tokenSession')
     const id = localStorage.getItem('id')
-    usuariosRequest(id, token)
+    return usuariosRequest(id, token) // Retorna la promesa directamente
 }
 
 export function updateUsuarioData(newData) {
-  const token = localStorage.getItem('tokenSession');
-  const userId = localStorage.getItem('id');
-  updateUsuarioRequest(token, userId, newData);
+    const token = localStorage.getItem('tokenSession')
+    const userId = localStorage.getItem('id')
+    updateUsuarioRequest(token, userId, newData)
 }
 /**
  * Borra los datos del usuario almacenados localmente.
